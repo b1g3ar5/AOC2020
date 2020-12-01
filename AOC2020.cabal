@@ -1,0 +1,93 @@
+cabal-version: 1.12
+
+-- This file has been generated from package.yaml by hpack version 0.33.0.
+--
+-- see: https://github.com/sol/hpack
+--
+-- hash: 989325f6d28704d21aaf29a33c4f2a597be9bcaf3698a80fbdcfbe14b0182c53
+
+name:           AOC2020
+version:        0.1.0.0
+description:    Please see the README on GitHub at <https://github.com/b1g3ar5/AOC2020#readme>
+homepage:       https://github.com/b1g3ar5/AOC2020#readme
+bug-reports:    https://github.com/b1g3ar5/AOC2020/issues
+author:         Nick Straw
+maintainer:     nick@broxholme.com
+copyright:      N J Straw
+license:        BSD3
+license-file:   LICENSE
+build-type:     Simple
+extra-source-files:
+    README.md
+    ChangeLog.md
+
+source-repository head
+  type: git
+  location: https://github.com/b1g3ar5/AOC2020
+
+library
+  exposed-modules:
+      Day1
+      Day10
+      Day11
+      Day12
+      Day13
+      Day14
+      Day15
+      Day16
+      Day17
+      Day18
+      Day19
+      Day2
+      Day20
+      Day21
+      Day22
+      Day23
+      Day24
+      Day3
+      Day4
+      Day5
+      Day6
+      Day7
+      Day8
+      Day9
+      Lib
+      Utils
+  other-modules:
+      Paths_AOC2020
+  hs-source-dirs:
+      src
+  build-depends:
+      Clever
+    , base >=4.7 && <5
+    , vector
+  default-language: Haskell2010
+
+executable AOC2020-exe
+  main-is: Main.hs
+  other-modules:
+      Paths_AOC2020
+  hs-source-dirs:
+      app
+  ghc-options: -threaded -rtsopts -with-rtsopts=-N
+  build-depends:
+      AOC2020
+    , Clever
+    , base >=4.7 && <5
+    , vector
+  default-language: Haskell2010
+
+test-suite AOC2020-test
+  type: exitcode-stdio-1.0
+  main-is: Spec.hs
+  other-modules:
+      Paths_AOC2020
+  hs-source-dirs:
+      test
+  ghc-options: -threaded -rtsopts -with-rtsopts=-N
+  build-depends:
+      AOC2020
+    , Clever
+    , base >=4.7 && <5
+    , vector
+  default-language: Haskell2010

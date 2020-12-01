@@ -1,0 +1,8 @@
+packages:
+- .
+- ../../Clever
+extra-deps:
+- Stream-0.4.7.2
+- sized-grid-0.2.0.1
+- lazysmallcheck-0.6
+resolver: lts-16.24
