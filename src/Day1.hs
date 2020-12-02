@@ -1,10 +1,9 @@
 
 module Day1 where
 
-import Utils
 
--- Simple search works pretty quickly on only 200 numbers.
--- I thought that ordering might make it quicker
+import Utils (getLines)
+
 
 day1 :: IO ()
 day1 = do
@@ -17,8 +16,8 @@ day1 = do
       t3 = [(x, y, z) | x <- transactions, y <- transactions, z <- transactions, (x+y+z) == 2020]
       (x, y) = head t2
       (p, q, r) = head t3
-  putStrLn $ "Day1:" ++ show (head t2)
-  putStrLn $ "Day1:" ++ show (head t3)
+  --putStrLn $ "Day1:" ++ show (head t2)
+  --putStrLn $ "Day1:" ++ show (head t3)
   putStrLn $ "Day1: part1: " ++ show (x*y)
   putStrLn $ "Day1: part2: " ++ show (p*q*r)
 
