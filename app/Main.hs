@@ -1,6 +1,5 @@
 module Main where
 
-import Lib
 import Day1
 import Day2
 import Day3
@@ -29,8 +28,8 @@ import Day24
 
 main :: IO ()
 main = do
-  day1
-  --day2
+  --day1
+  day2
   --day3
   --day4
   --day5

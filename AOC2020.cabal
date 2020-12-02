@@ -4,7 +4,7 @@ cabal-version: 1.12
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: 989325f6d28704d21aaf29a33c4f2a597be9bcaf3698a80fbdcfbe14b0182c53
+-- hash: a6614d4b64571e8624b4e0605799cbc9fa3d180b7443928aa87171ae05d635fd
 
 name:           AOC2020
 version:        0.1.0.0
@@ -51,7 +51,6 @@ library
       Day7
       Day8
       Day9
-      Lib
       Utils
   other-modules:
       Paths_AOC2020
@@ -60,6 +59,7 @@ library
   build-depends:
       Clever
     , base >=4.7 && <5
+    , split
     , vector
   default-language: Haskell2010
 
@@ -74,6 +74,7 @@ executable AOC2020-exe
       AOC2020
     , Clever
     , base >=4.7 && <5
+    , split
     , vector
   default-language: Haskell2010
 
@@ -89,5 +90,6 @@ test-suite AOC2020-test
       AOC2020
     , Clever
     , base >=4.7 && <5
+    , split
     , vector
   default-language: Haskell2010

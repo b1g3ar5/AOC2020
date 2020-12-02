@@ -3,6 +3,9 @@ module Day1 where
 
 import Utils
 
+-- Simple search works pretty quickly on only 200 numbers.
+-- I thought that ordering might make it quicker
+
 day1 :: IO ()
 day1 = do
   inLines <- getLines 1
