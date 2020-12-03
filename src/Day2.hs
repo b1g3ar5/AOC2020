@@ -43,7 +43,7 @@ valid1 (Rule mn mx ch pwd) = (n>=mn) && (n<=mx)
 
 
 valid2 :: Rule -> Bool
-valid2 (Rule mn mx ch pwd) = (p1 && not p2) || (p2 && not p1)
+valid2 (Rule mn mx ch pwd) = p1 /= p2
   where
     p1 = pwd !! (mn-1) == ch
     p2 = pwd !! (mx-1) == ch

@@ -17,6 +17,9 @@ dependencies:
 - vector
 - Clever
 - split
+- mtl
+- comonad
+- finite-typelits
 
 library:
   source-dirs: src

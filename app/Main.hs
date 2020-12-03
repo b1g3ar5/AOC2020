@@ -3,6 +3,9 @@ module Main where
 import Day1
 import Day2
 import Day3
+import Day3m
+import Day3s
+import Day3vs
 import Day4
 import Day5
 import Day6
@@ -29,8 +32,11 @@ import Day24
 main :: IO ()
 main = do
   --day1
-  day2
+  --day2
   --day3
+  --day3m
+  --day3s
+  day3vs
   --day4
   --day5
   --day6
