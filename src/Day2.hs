@@ -19,7 +19,7 @@ readRule s = Rule (read smn) (read smx) ch pwd
     (smn, smx) = splitOn '-' $ head ws
     
 
-splitOn :: Char -> String -> (String, String)
+splitOn :: (Eq a) => a -> [a] -> ([a], [a])
 splitOn ch = go []
   where
     go acc (x:xs)

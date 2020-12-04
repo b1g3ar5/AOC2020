@@ -4,7 +4,7 @@ cabal-version: 1.12
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: 0e968d06bafd9b60bb928fbc551e0cda98fe880f0e72cacdced35953a272bbca
+-- hash: 45d1dd5c55d3078aeba65e3a76938ae9ddb24c7e901184bf126fbde0635e73e6
 
 name:           AOC2020
 version:        0.1.0.0
@@ -49,6 +49,7 @@ library
       Day3s
       Day3vs
       Day4
+      Day4p
       Day5
       Day6
       Day7
@@ -63,9 +64,16 @@ library
       Clever
     , base >=4.7 && <5
     , comonad
+    , containers
+    , data-fix
     , finite-typelits
+    , megaparsec
     , mtl
+    , sort
     , split
+    , tasty
+    , tasty-hunit
+    , tasty-quickcheck
     , vector
   default-language: Haskell2010
 
@@ -81,9 +89,16 @@ executable AOC2020-exe
     , Clever
     , base >=4.7 && <5
     , comonad
+    , containers
+    , data-fix
     , finite-typelits
+    , megaparsec
     , mtl
+    , sort
     , split
+    , tasty
+    , tasty-hunit
+    , tasty-quickcheck
     , vector
   default-language: Haskell2010
 
@@ -91,6 +106,7 @@ test-suite AOC2020-test
   type: exitcode-stdio-1.0
   main-is: Spec.hs
   other-modules:
+      Day4Tests
       Paths_AOC2020
   hs-source-dirs:
       test
@@ -100,8 +116,15 @@ test-suite AOC2020-test
     , Clever
     , base >=4.7 && <5
     , comonad
+    , containers
+    , data-fix
     , finite-typelits
+    , megaparsec
     , mtl
+    , sort
     , split
+    , tasty
+    , tasty-hunit
+    , tasty-quickcheck
     , vector
   default-language: Haskell2010

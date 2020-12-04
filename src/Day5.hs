@@ -9,4 +9,5 @@ import Bint
 
 day5 :: IO ()
 day5 = do
+  ls <- getLines 5 
   putStrLn "Day5:"
