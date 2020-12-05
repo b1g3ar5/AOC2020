@@ -5,8 +5,11 @@ import Utils
 import Data.List
 import Data.Vector (Vector)
 import qualified Data.Vector as V
-import Bint
+
 
 day6 :: IO ()
 day6 = do
-  putStrLn "Day6:"
+  let p1 = "Oi!"
+  let p2 = "Oi!"
+  putStrLn $ "Day6: part1: " ++ show p1
+  putStrLn $ "Day6: part2: " ++ show p2

@@ -20,15 +20,39 @@ day4 = do
 data Field = BYR | CID | ECL | EYR | HCL | HGT | IYR | PID deriving (Eq, Show, Ord)
 
 
-readField :: String -> Field
-readField "byr" = BYR
-readField "cid" = CID
-readField "ecl" = ECL 
-readField "eyr" = EYR
-readField "hcl" = HCL
-readField "hgt" = HGT
-readField "iyr" = IYR
-readField "pid" = PID
+instance Read Field where
+  readsPrec _ s 
+    | t == "byr" = [(BYR, d)]
+    | t == "cid" = [(CID, d)]
+    | t == "ecl" = [(ECL, d)]
+    | t == "eyr" = [(EYR, d)]
+    | t == "hcl" = [(HCL, d)]
+    | t == "hgt" = [(HGT, d)]
+    | t == "iyr" = [(IYR, d)]
+    | t == "pid" = [(PID, d)]
+    where
+      t = take 3 s
+      d = drop 3 s
+  readsPrec _ _ = []  
+
+
+data Colour = AMB | BLU | BRN | GRY | GRN | HZL | OTH deriving (Eq, Show, Ord)
+
+
+instance Read Colour where
+  readsPrec _ s 
+    | t == "amb" = [(AMB, d)]
+    | t == "blu" = [(BLU, d)]
+    | t == "brn" = [(BRN, d)]
+    | t == "gry" = [(GRY, d)]
+    | t == "grn" = [(GRN, d)]
+    | t == "hzl" = [(HZL, d)]
+    | t == "oth" = [(OTH, d)]
+    where
+      t = take 3 s
+      d = drop 3 s
+  readsPrec _ _ = []  
+
 
 
 boundsCheck :: Int -> Int -> String -> Bool
@@ -107,4 +131,4 @@ validField IYR = iyrOK
 validField PID = pidOK
 
 getPassportData :: [String] -> [PassportData]
-getPassportData ss = (first readField <$>) . (split1 ':' <$>) . words . unwords <$> splitOnStr [""] ss
+getPassportData ss = (first read <$>) . (split1 ':' <$>) . words . unwords <$> splitOnStr [""] ss

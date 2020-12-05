@@ -54,7 +54,7 @@ parseFieldWithValue :: Parser (Field, String)
 parseFieldWithValue = do
   f <- choice parseF 
   single ':'
-  s <- manyTill (oneOf "#abcdefghijklmnopqrstuvwxyz0132456789") $ oneOf "\n " -- note, space of newline
+  s <- manyTill (oneOf "#abcdefghijklmnopqrstuvwxyz0132456789") $ oneOf "\n " -- note, space or newline
   return (f, s)
 
 
