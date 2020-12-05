@@ -1,13 +1,10 @@
 module Day2 where
 
 
-import Utils (getLines)
+import Utils (getLines, split1)
 
 
-data Rule = Rule { mn ::Int
-                  , mx ::  Int
-                  , ch :: Char
-                  , pwd :: String} deriving (Eq, Show)
+data Rule = Rule { mn ::Int, mx ::  Int, ch :: Char, pwd :: String} deriving (Eq, Show)
 
 
 readRule :: String -> Rule
@@ -16,30 +13,13 @@ readRule s = Rule (read smn) (read smx) ch pwd
     ws = words s
     ch = head $ ws!!1
     pwd = ws!!2
-    (smn, smx) = splitOn '-' $ head ws
+    (smn, smx) = split1 '-' $ head ws
     
-
-splitOn :: (Eq a) => a -> [a] -> ([a], [a])
-splitOn ch = go []
-  where
-    go acc (x:xs)
-      | x == ch = (acc, xs)
-      | otherwise = go (acc++[x]) xs
-
-
-count :: (Eq a) => a -> [a] -> Int
-count ch = go 0
-  where
-    go n [] = n
-    go n (x:xs)
-      | x == ch = go (n+1) xs
-      | otherwise = go n xs
-
 
 valid1 :: Rule -> Bool
 valid1 (Rule mn mx ch pwd) = (n>=mn) && (n<=mx)
   where
-    n = count ch pwd
+    n = length $ filter (==ch) pwd
 
 
 valid2 :: Rule -> Bool

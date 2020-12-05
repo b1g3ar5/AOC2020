@@ -1,21 +1,19 @@
 module Day3s where
 
 
-import Utils (getLines)
+import Utils (getLines, Coord)
 import Data.Vector (Vector, fromList)
 import qualified Data.Vector as V ((!))
-import Control.Comonad.Store
+import Control.Comonad.Store ( store, ComonadStore(peek), Store )
 
 
 -- A version using Store comonad - not really using it's best bits!
 
-type Coord = (Int, Int)
-
-
 type Grid a = Store Coord a
 
 
--- The store knows nothing about it's bounds
+-- The store knows nothing about it's bounds, so if the index is too big we need
+-- these to do the wrapping
 gWidth :: Int
 gWidth = 31
 gHeight :: Int
@@ -31,7 +29,7 @@ readGrid ls = store (v !) (0, 0)
     go s = (=='#') <$> s
 
 
--- We need this lookup functino to define the store
+-- We need this lookup function to tell the store how to look given a coordinate
 (!) :: Vector (Vector a) -> Coord -> a
 v ! (x, y) = (v V.! y) V.! x
 
@@ -42,6 +40,8 @@ countTrees g (ix, iy) = go 0 (0,0)
     go :: Int -> (Int, Int) -> Int
     go n p@(x, y)
       | y >= gHeight = n
+      -- if peek is True we add one...
+      -- notice the bounds are used here
       | peek p g = go (n+1) ((x+ix) `mod` gWidth, y+iy)
       | otherwise = go n ((x+ix) `mod` gWidth, y+iy)
 

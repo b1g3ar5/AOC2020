@@ -1,8 +1,7 @@
 module Day4 where
 
 
-import Utils (getLines)
-import Data.List.Split (splitOn)
+import Utils (getLines, split1, splitOnStr)
 import Data.Bifunctor (first)
 
 
@@ -83,14 +82,6 @@ pidOK :: String -> Bool
 pidOK s = length s == 9 && and ((`elem` dec) <$> s)
 
 
-split1 :: (Eq a) => a -> [a] -> ([a], [a])
-split1 ch = go []
-  where
-    go acc (x:xs)
-      | x == ch = (acc, xs)
-      | otherwise = go (acc++[x]) xs
-
-
 type PassportData = [(Field, String)]
 
 
@@ -116,4 +107,4 @@ validField IYR = iyrOK
 validField PID = pidOK
 
 getPassportData :: [String] -> [PassportData]
-getPassportData ss = (first readField <$>) . (split1 ':' <$>) . words . unwords <$> splitOn [""] ss
+getPassportData ss = (first readField <$>) . (split1 ':' <$>) . words . unwords <$> splitOnStr [""] ss

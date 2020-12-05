@@ -32,15 +32,15 @@ import Day24
 
 main :: IO ()
 main = do
-  --day1
-  --day2
-  --day3
-  --day3m
-  --day3s
-  --day3vs
-  --day4
+  day1
+  day2
+  day3
+  day3m
+  day3s
+  day3vs
+  day4
   day4p
-  --day5
+  day5
   --day6
   --day7
   --day8

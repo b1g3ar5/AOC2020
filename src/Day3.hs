@@ -1,14 +1,13 @@
 module Day3 where
 
 
-import Utils (getLines)
+import Utils (getLines, Coord)
 import Data.Vector (Vector, fromList)
 import qualified Data.Vector as V ((!))
 
 
-type Coord = (Int, Int)
--- This is the width heoght and the ground data
-type Env = ((Int, Int), Vector (Vector Bool))
+-- This is the width height and the ground data
+type Env = (Coord, Vector (Vector Bool))
 
 
 -- This doesn't need to check bounds because the go function
@@ -25,7 +24,7 @@ readGrid ls = ((length $ v V.! 0, length v), v)
     go s = (=='#') <$> s
 
 
-countTrees :: Env -> (Int, Int) -> Int
+countTrees :: Env -> Coord -> Int
 countTrees ((width, height), g) (ix,iy) = go 0 (0,0)
   where
     go n (x, y)
@@ -41,6 +40,7 @@ day3 = do
       numTrees1 = countTrees g (3,1)
   putStrLn $ "Day3: part1: " ++ show numTrees1
 
-  let slopes = [(1,1), (3,1), (5,1), (7,1), (1,2)]
+  let slopes :: [Coord]
+      slopes = [(1,1), (3,1), (5,1), (7,1), (1,2)]
       numTrees2 = product $ countTrees g <$> slopes
   putStrLn $ "Day3: part2: " ++ show numTrees2

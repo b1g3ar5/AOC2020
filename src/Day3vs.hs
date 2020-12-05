@@ -5,27 +5,24 @@
 {-# LANGUAGE KindSignatures      #-}
 {-# LANGUAGE ScopedTypeVariables #-}
 {-# LANGUAGE TypeApplications    #-}
-{-# LANGUAGE TypeOperators       #-}
 
 
 module Day3vs where
 
 
-import GHC.TypeNats
-import Data.Proxy
-import Data.Finite (Finite, modulo, packFinite, finite, getFinite )
-import Data.Vector (Vector, fromList)
+import GHC.TypeNats ( KnownNat, Nat, natVal )
+import Data.Proxy ( Proxy(Proxy) )
+import Data.Finite (finite )
+import Data.Vector (fromList)
 
-import Utils (getLines)
+import Utils (getLines, Coord)
 import Vec (Mat(..), mindex, withMat)
 
-import Debug.Trace
 
 -- Another version with my type level sized vector
 
-type Coord = (Integer, Integer)
-
-
+-- The Grid is a continuation - you need to pass a function to it
+-- but your function can reify the size of the Grid
 type Grid m n r = (forall m n. (KnownNat m, KnownNat n) => Mat m n Bool -> r) -> r
 
 
@@ -37,18 +34,18 @@ readGrid ls = withMat v
     go s = (=='#') <$> s
 
 
--- This lookup funcrion wraps the x coord and return Nothing if the y coord is too big
-at :: forall (m :: Nat) (n :: Nat) a. (KnownNat m, KnownNat n) => Mat m n a -> (Integer, Integer) -> Maybe a
+-- This lookup function wraps the x coord and return Nothing if the y coord is too big
+at :: forall (m :: Nat) (n :: Nat) a. (KnownNat m, KnownNat n) => Mat m n a -> Coord -> Maybe a
 g `at` (x, y)
   | y >= intM = Nothing
-  | otherwise = Just $ g `mindex` (finite mx, finite y)
+  | otherwise = Just $ g `mindex` (finite mx, finite $ toInteger y)
   where
-    mx = x `mod` intN
-    intN = toInteger (natVal (Proxy @n))
-    intM = toInteger (natVal (Proxy @m))
+    mx = toInteger $ x `mod` intN
+    intN = fromIntegral $ toInteger (natVal (Proxy @n))
+    intM = fromIntegral $ toInteger (natVal (Proxy @m))
 
 
-countTrees :: forall (m :: Nat) (n :: Nat) a. (KnownNat m, KnownNat n) => (Integer, Integer) -> Mat m n Bool -> Int
+countTrees :: forall (m :: Nat) (n :: Nat) a. (KnownNat m, KnownNat n) => Coord -> Mat m n Bool -> Int
 countTrees (ix,iy) g = go 0 (0,0)
   where
     go ntrees (x, y) = case g `at` (x, y) of

@@ -1,28 +1,22 @@
 module Day3m where
 
 
-import Utils (getLines)
+import Utils (getLines, Coord)
 import Data.Vector (Vector, fromList)
 import qualified Data.Vector as V ((!))
 import Control.Monad.Reader (asks, runReader, Reader)
 
 
 -- A version using the reader monad for the environment
+-- We don't need to change it so we don't need state
 
-type Coord = (Int, Int)
-
-
-data Env = Env { bnds :: Coord
-                , ground ::Vector (Vector Bool)
-               } deriving (Show)
+data Env = Env { bounds :: Coord, ground ::Vector (Vector Bool)} deriving (Show)
 
 
 readGrid :: [String] -> Env
-readGrid ls = Env (width, height) v
+readGrid ls = Env (length $ v V.! 0, length v) v
   where
     v = fromList ( fromList . go <$> ls)
-    height = length v
-    width = length $ v V.! 0
     go :: String -> [Bool]
     go s = (=='#') <$> s
 
@@ -31,10 +25,10 @@ readGrid ls = Env (width, height) v
 v ! (x, y) = (v V.! y) V.! x
 
 
-countTrees :: (Int, Int) -> Reader Env Int
+countTrees :: Coord -> Reader Env Int
 countTrees (ix,iy) = do
   g <- asks ground
-  (width, height) <- asks bnds
+  (width, height) <- asks bounds
   let go :: Int -> (Int, Int) -> Int
       go n (x, y)
         | y>=height = n
@@ -50,3 +44,8 @@ day3m = do
       numTrees1 :: Int
       numTrees1 = runReader (countTrees (3, 1)) env
   putStrLn $ "Day3: part1: " ++ show numTrees1
+
+  let slopes :: [Coord]
+      slopes = [(1,1), (3,1), (5,1), (7,1), (1,2)]
+      numTrees2 = product $ ($ env) . runReader . countTrees <$> slopes 
+  putStrLn $ "Day3: part2: " ++ show numTrees2

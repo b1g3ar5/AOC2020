@@ -54,34 +54,50 @@ parseFieldWithValue :: Parser (Field, String)
 parseFieldWithValue = do
   f <- choice parseF 
   single ':'
-  s <- manyTill (oneOf "#abcdefghijklmnopqrstuvwxyz0132456789") $ oneOf "\n "
+  s <- manyTill (oneOf "#abcdefghijklmnopqrstuvwxyz0132456789") $ oneOf "\n " -- note, space of newline
   return (f, s)
 
 
 parseF :: [Parser Field]
-parseF = uncurry comb  <$> [("byr", BYR), ("cid", CID), ("ecl", ECL), ("eyr", EYR), ("hcl", HCL), ("hgt", HGT), ("iyr", IYR), ("pid", PID)]
-
-
-comb :: String -> Field -> Parser Field
-comb s f = chunk s >> return f
+parseF = (\s -> chunk s >> return (read s))  <$> ["byr", "cid", "ecl", "eyr", "hcl", "hgt", "iyr", "pid"]
 
 
 data Field = BYR | CID | ECL | EYR | HCL | HGT | IYR | PID deriving (Eq, Show, Ord)
 
 
--- Validation functions
+instance Read Field where
+  readsPrec _ s 
+    | t == "byr" = [(BYR, d)]
+    | t == "cid" = [(CID, d)]
+    | t == "ecl" = [(ECL, d)]
+    | t == "eyr" = [(EYR, d)]
+    | t == "hcl" = [(HCL, d)]
+    | t == "hgt" = [(HGT, d)]
+    | t == "iyr" = [(IYR, d)]
+    | t == "pid" = [(PID, d)]
+    where
+      t = take 3 s
+      d = drop 3 s
+  readsPrec _ _ = []  
+
+
+-- Validation ...
+hex, dec :: String
+hex = "0123456789abcdef"
+dec = "0123456789"
+
+
 boundsCheck :: Int -> Int -> String -> Bool
 boundsCheck mn mx s = (n>=mn) && (n<=mx)
   where
     n = read s
 
-byrOK, iyrOK, eyrOK :: String -> Bool
+
+byrOK, iyrOK, eyrOK, hgtOK, hclOK, eclOK, pidOK :: String -> Bool
 byrOK = boundsCheck 1920 2002
 iyrOK = boundsCheck 2010 2020
 eyrOK = boundsCheck 2020 2030
 
-
-hgtOK :: String -> Bool
 hgtOK s
   | u == "cm" = boundsCheck 150 193 n
   | u == "in" = boundsCheck 59 76 n
@@ -91,23 +107,12 @@ hgtOK s
     u = drop (len-2) s
     n = take (len-2) s
 
-
-hclOK :: String -> Bool
 hclOK (c:cs)
   | c /= '#' = False
   | length cs /= 6 = False
   | and $ (`elem` hex) <$> cs = True
   | otherwise = False
 
-
-hex, dec :: String
-hex = "0123456789abcdef"
-dec = "0123456789"
-
-
-eclOK :: String -> Bool
 eclOK s = s == "amb" || s == "blu" || s == "brn" || s == "gry" || s == "grn" || s == "hzl" || s == "oth"
 
-
-pidOK :: String -> Bool
 pidOK s = length s == 9 && and ((`elem` dec) <$> s)
