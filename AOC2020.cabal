@@ -4,7 +4,7 @@ cabal-version: 1.12
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: 45d1dd5c55d3078aeba65e3a76938ae9ddb24c7e901184bf126fbde0635e73e6
+-- hash: 105a6028ddb67b110686703b4cff6f3942df33b853923bf7a8b5249bb6401e4c
 
 name:           AOC2020
 version:        0.1.0.0
@@ -69,6 +69,7 @@ library
     , finite-typelits
     , megaparsec
     , mtl
+    , semirings
     , sort
     , split
     , tasty
@@ -94,6 +95,7 @@ executable AOC2020-exe
     , finite-typelits
     , megaparsec
     , mtl
+    , semirings
     , sort
     , split
     , tasty
@@ -121,6 +123,7 @@ test-suite AOC2020-test
     , finite-typelits
     , megaparsec
     , mtl
+    , semirings
     , sort
     , split
     , tasty

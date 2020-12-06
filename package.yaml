@@ -27,6 +27,7 @@ dependencies:
 - tasty-hunit
 - data-fix
 - megaparsec
+- semirings
 
 library:
   source-dirs: src

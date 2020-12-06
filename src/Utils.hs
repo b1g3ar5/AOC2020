@@ -35,6 +35,9 @@ splitOnChar :: Eq a => a -> [a] -> [[a]]
 splitOnChar c = go []
   where
     go acc [] = acc
+    go [] (x:xs)
+      | x==c = go [] xs
+      | otherwise = go [[x]] xs
     go acc@(w:ws) (x:xs)
       | x==c = go ([]:acc) xs
       | otherwise = go ((w++[x]):ws) xs
