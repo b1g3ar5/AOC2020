@@ -6,7 +6,10 @@ module Computer where
 import Data.Vector (Vector, (//), (!))
 
 
-data Inst = Acc Int | Jmp Int | Nop Int deriving (Show, Eq)
+data Inst = Acc Int 
+          | Jmp Int 
+          | Nop Int deriving (Show, Eq)
+
 
 isJmp, isNop, isAcc :: Inst -> Bool
 isJmp (Jmp _) = True
@@ -33,23 +36,30 @@ parse s
     sgn = if s!!4 == '+' then 1 else -1
 
 
--- The memory has a position, an accumulator and an instruction set
--- and a list of instructions visited
-data Computer = Computer { pos :: Int
-                         , acc :: Int
-                         , instructions :: Vector (Inst, Bool)
-                         } deriving (Show)
+-- A Tape is a set of instructions
+type Tape = Vector (Inst, Bool)
+
+-- The memory has a position, a register and an instruction set
+-- which records whether eash instruction has been executed
+data Comp = Comp { pos :: Int
+                 , reg :: Int
+                 , instructions :: Tape
+                 } deriving (Show)
 
 
-run :: Computer -> (Int, Bool)
-run (Computer p acc tape)
-  | p==n = (acc, True)  -- off the end of the tape so HALT
+update :: Tape -> (Int, (Inst, Bool)) -> Tape
+update tape (pos, ins) = tape // [(pos, ins)]
+
+
+run :: Comp -> (Int, Bool)
+run (Comp pos acc tape)
+  | pos==n = (acc, True)  -- off the end of the tape so HALT
   | b    = (acc, False) -- already visited this instruction so HALT
   | otherwise = case ins of
                   -- Add to accumulator, move to next instruction, mark instruction as visited
-                  Acc x -> run (Computer (p+1) (acc+x) $ tape // [(p, (ins, True))])
-                  Jmp x -> run (Computer (p+x) acc $ tape // [(p, (ins, True))])
-                  Nop _ -> run (Computer (p+1) acc $ tape // [(p, (ins, True))])
+                  Acc x -> run (Comp (pos+1) (acc+x) $ tape `update` (pos, (ins, True)))
+                  Jmp x -> run (Comp (pos+x) acc     $ tape `update` (pos, (ins, True)))
+                  Nop _ -> run (Comp (pos+1) acc     $ tape `update` (pos, (ins, True)))
   where
-    (ins, b) = tape!p
+    (ins, b) = tape!pos
     n = length tape
