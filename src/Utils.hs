@@ -1,18 +1,26 @@
 module Utils where
 
 
-getRaw :: Int -> IO String
-getRaw n = readFile $ "./Data/Day" ++ show n ++ ".txt"
-
-
 getF :: (String -> a) -> Int -> IO a
 getF f n = do
-  s <- getRaw n
+  s <- readFile $ "./Data/Day" ++ show n ++ ".txt"
   return $ f s
 
 
+getRaw :: Int -> IO String
+getRaw = getF id
+
+
+getWords :: Int -> IO [String]
 getWords = getF words
+
+
+getLines :: Int -> IO [String]
 getLines = getF lines
+
+
+getGroups :: Int -> IO [[String]]
+getGroups = getF (splitOnChar "" . lines)
 
 
 -- This does conversion units at the front of the list
