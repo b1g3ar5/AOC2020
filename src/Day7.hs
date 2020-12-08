@@ -11,8 +11,8 @@ data Bag = Bag { col :: Colour
                } deriving (Show)
 
 
-parseLine :: String -> Bag
-parseLine s = Bag col $ if ps!!1 == "no other bags." then [] else parseBag <$> bs 
+parse :: String -> Bag
+parse s = Bag col $ if ps!!1 == "no other bags." then [] else parseBag <$> bs 
   where
     ps = splitOnStr " bags contain " s
     col = head ps
@@ -27,7 +27,7 @@ parseLine s = Bag col $ if ps!!1 == "no other bags." then [] else parseBag <$> b
 day7 :: IO ()
 day7 = do
   ls <- getLines 7
-  let bs = parseLine <$> ls
+  let bs = parse <$> ls
   putStrLn $ "Day7: part1: " ++ show (length $ filter (doesItNeed bs) bs)
   putStrLn $ "Day7: part2: " ++ show (howManyDoesItNeed bs (head $ filter (\(Bag x _) -> x == "shiny gold") bs)-1)
 
