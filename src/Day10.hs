@@ -2,7 +2,7 @@ module Day10 where
 
 
 import Utils ( getLines )
-import Data.List ( group, sort, foldl' )
+import Data.List ( group, sort, foldl', sortOn, groupBy )
 import Memo ( memoise )
 import System.TimeIt ( timeIt )
 
@@ -62,8 +62,10 @@ day10 = do
   let ns :: [Int]
       ns = read <$> ls
       xs = sort $ 0:ns ++ [maximum ns + 3]
+      p2 = product $ zipWith (^) [1,1,2,4,7] $ length <$> group (sort $ length <$> split xs)
 
   
   timeIt $ putStrLn $ "Day10: part1: " ++ show (countGaps xs)
   timeIt $ putStrLn $ "Day10: part2: splitting: " ++ show (product $ countPerms <$> split xs)
   timeIt $ putStrLn $ "Day10: part2: memoisation: " ++ show (countPerms2 xs)
+  timeIt $ putStrLn $ "Day10: part2: maths: " ++ show p2
