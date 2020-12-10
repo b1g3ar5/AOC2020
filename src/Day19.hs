@@ -5,8 +5,9 @@ import Utils
 import Data.List
 import Data.Vector (Vector)
 import qualified Data.Vector as V
-import Bint
+
 
 day19 :: IO ()
 day19 = do
-  putStrLn "Day19:"
+  ls <- getLines 19
+  putStrLn $ "Day19: " ++ show ls
