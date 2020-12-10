@@ -2,8 +2,8 @@ module Day8 where
 
 import Prelude hiding (filter, (++))
 import qualified Prelude as P ((++))
-import Utils
-import Data.Vector (Vector, (//), (!), fromList, findIndices, filter, (++))
+import Utils ( getLines )
+import Data.Vector (Vector, (!), fromList, findIndices, filter, (++))
 import Computer
 
 

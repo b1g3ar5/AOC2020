@@ -28,6 +28,8 @@ dependencies:
 - data-fix
 - megaparsec
 - semirings
+- hashable
+- timeit
 
 library:
   source-dirs: src

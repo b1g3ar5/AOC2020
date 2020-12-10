@@ -4,7 +4,7 @@ cabal-version: 1.12
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: 67f90bf554cee420103856c8de283aa73e1b24db2a36fe8786f7a94fc2af23dc
+-- hash: 8cc5a813a19ce95472009cb89309fcb02cd6417b22a816ce3f7bef8abe7d139d
 
 name:           AOC2020
 version:        0.1.0.0
@@ -54,9 +54,8 @@ library
       Day5
       Day6
       Day7
-      Day7a
       Day7l
-      Day7m
+      Day7s
       Day8
       Day9
       PQueue
@@ -74,6 +73,7 @@ library
     , containers
     , data-fix
     , finite-typelits
+    , hashable
     , megaparsec
     , mtl
     , semirings
@@ -82,6 +82,7 @@ library
     , tasty
     , tasty-hunit
     , tasty-quickcheck
+    , timeit
     , vector
   default-language: Haskell2010
 
@@ -100,6 +101,7 @@ executable AOC2020-exe
     , containers
     , data-fix
     , finite-typelits
+    , hashable
     , megaparsec
     , mtl
     , semirings
@@ -108,6 +110,7 @@ executable AOC2020-exe
     , tasty
     , tasty-hunit
     , tasty-quickcheck
+    , timeit
     , vector
   default-language: Haskell2010
 
@@ -128,6 +131,7 @@ test-suite AOC2020-test
     , containers
     , data-fix
     , finite-typelits
+    , hashable
     , megaparsec
     , mtl
     , semirings
@@ -136,5 +140,6 @@ test-suite AOC2020-test
     , tasty
     , tasty-hunit
     , tasty-quickcheck
+    , timeit
     , vector
   default-language: Haskell2010
