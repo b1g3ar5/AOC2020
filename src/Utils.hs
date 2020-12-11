@@ -1,5 +1,9 @@
+{-# LANGUAGE TupleSections #-}
+
+
 module Utils where
 
+import Debug.Trace
 
 getF :: (String -> a) -> Int -> IO a
 getF f n = do
@@ -64,3 +68,47 @@ splitOnStr s = reverse . go [[]]
 -- A 2D coordinate or a vector
 type Coord = (Int, Int)
 
+
+neighbourCoords :: [Coord]
+neighbourCoords = [(x, y) | x <- [-1, 0, 1], y <- [-1, 0, 1], (x, y) /= (0, 0)]
+
+
+addCoords :: Coord -> Coord -> Coord
+addCoords (x, y) (x', y') = (x + x', y + y')
+
+
+at :: [Coord] -> Coord -> [Coord]
+coords `at` origin = map (addCoords origin) coords
+
+
+mul :: Int -> Coord -> Coord
+mul c (x,y) = (c*x, c*y)
+
+
+findTarget :: (Coord -> Bool) -> Coord -> Direction -> Maybe Coord
+findTarget p pos dir = case filter p $ ray pos dir of
+                         [] -> Nothing
+                         (x:_) -> trace ("findTarget returns: " ++ show x) $ Just x
+
+
+data Direction = N | S | E | W | NE | SE | SW | NW
+    
+directions :: [Direction]
+directions = [N,S,E,W,NE,SE,SW,NW]
+
+
+ray :: Coord -> Direction -> [Coord]
+ray (_, 0) N = []
+ray (_, 0) NE = []
+ray (_, 0) NW = []
+ray (0, _) W = []
+ray (0, _) SW = []
+ray (0, _) NW = []
+ray (px, py) N =  (px, ) <$> [(py-1)..0]
+ray (px, py) S =  (px, ) <$> [(py+1)..]
+ray (px, py) E =  (, py) <$> [(px+1)..]
+ray (px, py) W =  (, py) <$> [(px-1)..0]
+ray (px, py) NE = (\i -> (px+i, py-i)) <$> [1..py]
+ray (px, py) SE = (\i -> (px+i, py+i)) <$> [1..]
+ray (px, py) SW = (\i -> (px-i, py+i)) <$> [1..px]
+ray (px, py) NW = (\i -> (px-i, py-i)) <$> [1..(min py px)]

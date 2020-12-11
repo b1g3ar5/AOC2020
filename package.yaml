@@ -30,6 +30,9 @@ dependencies:
 - semirings
 - hashable
 - timeit
+- adjunctions
+- distributive
+- comonad
 
 library:
   source-dirs: src

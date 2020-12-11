@@ -4,7 +4,7 @@ cabal-version: 1.12
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: 8cc5a813a19ce95472009cb89309fcb02cd6417b22a816ce3f7bef8abe7d139d
+-- hash: ddba6eaa613fae069c29fde1606709dfef5cc3f879fabff92a869d7cfefb7bae
 
 name:           AOC2020
 version:        0.1.0.0
@@ -31,6 +31,7 @@ library
       Day1
       Day10
       Day11
+      Day11s
       Day12
       Day13
       Day14
@@ -68,10 +69,12 @@ library
       src
   build-depends:
       Clever
+    , adjunctions
     , base >=4.7 && <5
     , comonad
     , containers
     , data-fix
+    , distributive
     , finite-typelits
     , hashable
     , megaparsec
@@ -96,10 +99,12 @@ executable AOC2020-exe
   build-depends:
       AOC2020
     , Clever
+    , adjunctions
     , base >=4.7 && <5
     , comonad
     , containers
     , data-fix
+    , distributive
     , finite-typelits
     , hashable
     , megaparsec
@@ -126,10 +131,12 @@ test-suite AOC2020-test
   build-depends:
       AOC2020
     , Clever
+    , adjunctions
     , base >=4.7 && <5
     , comonad
     , containers
     , data-fix
+    , distributive
     , finite-typelits
     , hashable
     , megaparsec
