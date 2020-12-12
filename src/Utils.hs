@@ -73,42 +73,30 @@ neighbourCoords :: [Coord]
 neighbourCoords = [(x, y) | x <- [-1, 0, 1], y <- [-1, 0, 1], (x, y) /= (0, 0)]
 
 
-addCoords :: Coord -> Coord -> Coord
-addCoords (x, y) (x', y') = (x + x', y + y')
+add :: Coord -> Coord -> Coord
+add (x, y) (x', y') = (x + x', y + y')
 
 
 at :: [Coord] -> Coord -> [Coord]
-coords `at` origin = map (addCoords origin) coords
+coords `at` origin = map (add origin) coords
 
 
 mul :: Int -> Coord -> Coord
 mul c (x,y) = (c*x, c*y)
 
 
-findTarget :: (Coord -> Bool) -> Coord -> Direction -> Maybe Coord
-findTarget p pos dir = case filter p $ ray pos dir of
-                         [] -> Nothing
-                         (x:_) -> trace ("findTarget returns: " ++ show x) $ Just x
+-- This takes 2 predicates isFinished and isOK
+-- and a start value and a next function
+-- it returns True if isOK happens before isFinished
+race :: (a -> Bool) -> (a -> Bool) -> a -> (a -> a) -> Bool
+race isFinished isOk x next 
+  | isFinished nxt = False
+  | isOk nxt = True
+  | otherwise = race isFinished isOk nxt next
+  where
+    nxt = next x
 
 
-data Direction = N | S | E | W | NE | SE | SW | NW
-    
-directions :: [Direction]
-directions = [N,S,E,W,NE,SE,SW,NW]
 
-
-ray :: Coord -> Direction -> [Coord]
-ray (_, 0) N = []
-ray (_, 0) NE = []
-ray (_, 0) NW = []
-ray (0, _) W = []
-ray (0, _) SW = []
-ray (0, _) NW = []
-ray (px, py) N =  (px, ) <$> [(py-1)..0]
-ray (px, py) S =  (px, ) <$> [(py+1)..]
-ray (px, py) E =  (, py) <$> [(px+1)..]
-ray (px, py) W =  (, py) <$> [(px-1)..0]
-ray (px, py) NE = (\i -> (px+i, py-i)) <$> [1..py]
-ray (px, py) SE = (\i -> (px+i, py+i)) <$> [1..]
-ray (px, py) SW = (\i -> (px-i, py+i)) <$> [1..px]
-ray (px, py) NW = (\i -> (px-i, py-i)) <$> [1..(min py px)]
+directions :: [Coord]
+directions = [(0, -1), (0, 1), (1, 0), (-1, 0), (1, -1), (1, 1), (-1, 1), (-1, -1)]

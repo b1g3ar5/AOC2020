@@ -7,7 +7,7 @@ module Day11s where
 
 
 import Utils
-import Data.List
+import Data.List ( intercalate )
 import Data.Vector (Vector)
 import qualified Data.Vector as V
 import qualified Data.Map as M
@@ -18,7 +18,16 @@ import Data.Functor.Compose (Compose(..))
 import Data.Functor.Rep (Representable(..), distributeRep)
 import Data.Maybe ()
 import System.TimeIt ( timeIt )
-import Data.Function (fix)
+
+
+{-
+
+This is a poor anser - I should be using finite integers so that I don't need the global
+grid size - or all the apparatus to check I'm not going off the edges of the grid.
+
+From line 73 down it's OK.
+
+-}
 
 
 -- The global grid size - so that I can write tabluate for the representative instance
@@ -39,8 +48,8 @@ instance Eq a => Eq (Grid a) where
   g == h = and $ (\c -> peek c g == peek c h) <$> concat allCoords
 
 
-showGrid :: Grid Char -> String
-showGrid g = intercalate "\n" $ (\r -> (\c -> (c,r) `peek`g) <$> [0..(gCols-1)]) <$> [0..(gRows-1)]
+instance Show (Grid Char) where
+  show g = intercalate "\n" $ (\r -> (\c -> (c,r) `peek`g) <$> [0..(gCols-1)]) <$> [0..(gRows-1)]
 
 
 -- I need these for the recangular fixed grid
@@ -117,20 +126,20 @@ rule1 g
 rule2 :: Rule Char
 rule2 g
   | cell == '.' = '.'
-  | (cell == 'L') && numNeighboursOccupied == 0 = '#'
-  | (cell == '#') && numNeighboursOccupied >= 5 = 'L'
+  | (cell == 'L') && seatsOccupied == 0 = '#' 
+  | (cell == '#') && seatsOccupied >= 5 = 'L' 
   | otherwise = cell
   where
     cell = extract g
 
-    numNeighboursOccupied = length $ filter id seatOccupied
-
-    seatOccupied :: [Bool]
-    seatOccupied = (\cs -> or ((=='#') <$> cs)) . find (/= '.') . ((`peek` g) <$> ) <$> filter (/=[]) (ray (pos g) <$> directions)
+    seatsOccupied :: Int
+    seatsOccupied = length $ filter id ((\d -> race isFinished isOccupied (pos g) (`add`d)) <$> directions)
+    isFinished c = not (inBounds c) || c `peek` g == 'L'
+    isOccupied c = c `peek` g == '#'
 
 
 safeAt :: [Coord] -> Coord -> [Coord]
-coords `safeAt` origin = filter inBounds $ map (addCoords origin) coords
+coords `safeAt` origin = filter inBounds $ map (add origin) coords
 
 
 stepUntil :: Eq a => Rule a -> Grid a -> Grid a
@@ -146,9 +155,9 @@ stepUntil r = go
 day11s :: IO ()
 day11s = do
   ls <- getLines 11
-  let g0 = readSeats ls
-  timeIt $ putStrLn $ "Day11s: Part1: " ++ show (count (== '#') $ stepUntil rule1 g0)
-  timeIt $ putStrLn $ "Day11s: Part1: " ++ show (count (== '#') $ stepUntil rule2 g0)
+  let g = readSeats ls
+  timeIt $ putStrLn $ "Day11s: Part1: " ++ show (count (== '#') $ stepUntil rule1 g)
+  timeIt $ putStrLn $ "Day11s: Part2: " ++ show (count (== '#') $ stepUntil rule2 g)
 
 
 readSeats :: [String] -> Grid Char
@@ -160,14 +169,3 @@ readSeats css =  mkGrid $ M.fromList g
     xs :: [Int]
     xs = [0..]
 
-test = [
-    "L.LL.LL.LL"
-  , "LLLLLLL.LL"
-  , "L.L.L..L.."
-  , "LLLL.LL.LL"
-  , "L.LL.LL.LL"
-  , "L.LLLLL.LL"
-  , "..L.L....."
-  , "LLLLLLLLLL"
-  , "L.LLLLLL.L"
-  , "L.LLLLL.LL"]    
