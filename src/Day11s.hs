@@ -22,10 +22,13 @@ import System.TimeIt ( timeIt )
 
 {-
 
-This is a poor anser - I should be using finite integers so that I don't need the global
+This is a poor answer - I should be using finite integers so that I don't need the global
 grid size - or all the apparatus to check I'm not going off the edges of the grid.
 
 From line 73 down it's OK.
+
+It is a bit quicker than the map version though - it might be because of the Representable instance?
+I've not investigated...
 
 -}
 

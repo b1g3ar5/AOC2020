@@ -67,12 +67,6 @@ day12 = do
       start2 = ((0, 0), (10, -1))
       ((x,y), _) = foldl' apply1 start1 instructions
       ((sx,sy), _) = foldl' apply2 start2 instructions
-  putStrLn $ "Day12: part1: " ++ show (abs $ x+y)
+  putStrLn $ "Day12: part1: " ++ show (abs x + abs y)
   putStrLn $ "Day12: part2: " ++ show (abs sx + abs sy)
 
-
-test = ["F10"
-  , "N3"
-  , "F7"
-  , "R90"
-  , "F11"]

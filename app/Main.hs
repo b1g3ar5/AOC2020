@@ -18,6 +18,8 @@ import Day9
 import Day10
 import Day11
 import Day11s
+import Day11g
+import Day11v
 import Day12
 import Day13
 import Day14
@@ -50,10 +52,11 @@ main = do
   --day8
   --day9
   --day10
-  day11
+  --day11
+  --day11v
   --day11s
   --day12
-  --day13
+  day13
   --day14
   --day15
   --day16

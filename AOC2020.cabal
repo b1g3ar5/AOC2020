@@ -4,7 +4,7 @@ cabal-version: 1.12
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: ddba6eaa613fae069c29fde1606709dfef5cc3f879fabff92a869d7cfefb7bae
+-- hash: faaf8b336c4d3bda940a8995f684d30b56e960aeff443f687fdcfac3426d4507
 
 name:           AOC2020
 version:        0.1.0.0
@@ -31,7 +31,9 @@ library
       Day1
       Day10
       Day11
+      Day11g
       Day11s
+      Day11v
       Day12
       Day13
       Day14
@@ -59,9 +61,6 @@ library
       Day7s
       Day8
       Day9
-      PQueue
-      Queue
-      Search
       Utils
   other-modules:
       Paths_AOC2020
@@ -76,10 +75,13 @@ library
     , data-fix
     , distributive
     , finite-typelits
+    , grids
     , hashable
+    , lens
     , megaparsec
     , mtl
     , semirings
+    , sized-grid
     , sort
     , split
     , tasty
@@ -87,6 +89,7 @@ library
     , tasty-quickcheck
     , timeit
     , vector
+    , vector-space
   default-language: Haskell2010
 
 executable AOC2020-exe
@@ -106,10 +109,13 @@ executable AOC2020-exe
     , data-fix
     , distributive
     , finite-typelits
+    , grids
     , hashable
+    , lens
     , megaparsec
     , mtl
     , semirings
+    , sized-grid
     , sort
     , split
     , tasty
@@ -117,6 +123,7 @@ executable AOC2020-exe
     , tasty-quickcheck
     , timeit
     , vector
+    , vector-space
   default-language: Haskell2010
 
 test-suite AOC2020-test
@@ -138,10 +145,13 @@ test-suite AOC2020-test
     , data-fix
     , distributive
     , finite-typelits
+    , grids
     , hashable
+    , lens
     , megaparsec
     , mtl
     , semirings
+    , sized-grid
     , sort
     , split
     , tasty
@@ -149,4 +159,5 @@ test-suite AOC2020-test
     , tasty-quickcheck
     , timeit
     , vector
+    , vector-space
   default-language: Haskell2010

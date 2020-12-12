@@ -33,6 +33,10 @@ dependencies:
 - adjunctions
 - distributive
 - comonad
+- sized-grid
+- lens
+- vector-space
+- grids
 
 library:
   source-dirs: src
