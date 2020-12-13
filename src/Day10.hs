@@ -18,7 +18,6 @@ countGaps ns = head ls * ls!!1
 countPerms :: [Int] -> Int
 countPerms ys = go [head ys] (tail ys)
   where
-    --ys = drop startix xs 
     go :: [Int] -> [Int] -> Int
     go _ [] = 1
     go acc [x] = if x > last acc + 3 then 0 else 1
