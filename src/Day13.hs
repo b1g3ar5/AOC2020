@@ -39,7 +39,7 @@ euclid [x] = x
 euclid (t1:t2:ts) = euclid $ rem2 t1 t2:ts
 
 
--- Extended Euclidian Algorithm
+-- Reverse Euclidian algorithm?
 gcd2 :: (Integer, Integer) -> (Integer, Integer)
 gcd2 (_, 0) = (1, 0)
 gcd2 (a, b) = (t, s - q * t)
@@ -49,6 +49,11 @@ gcd2 (a, b) = (t, s - q * t)
 
 
 -- Given 2 numbers and their rems, work out the rem of the product of the numbers
+-- We know that n1*m1+n2*m2=1 (that's what gcd2 does)
+-- Look at x = a1*m2*n2+a2*n1*m1
+-- x `mod` n1 = a1 * (n2*m2 `mod` n1) = a1 * 1 = a1
+-- x `mod` n2 = a2 * (n1*m1 `mod` n2) = a2 * 1 = a2
+-- as required so x is the number we want.
 rem2 :: (Integer, Integer) -> (Integer, Integer) -> (Integer, Integer)
 rem2 (n1, a1) (n2, a2) = (n1*n2, (a1*m2*n2+a2*m1*n1) `mod` (n1*n2))
   where

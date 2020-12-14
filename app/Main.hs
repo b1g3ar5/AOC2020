@@ -56,8 +56,8 @@ main = do
   --day11v
   --day11s
   --day12
-  day13
-  --day14
+  --day13
+  day14
   --day15
   --day16
   --day17

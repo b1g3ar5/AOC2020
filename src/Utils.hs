@@ -28,9 +28,21 @@ getGroups = getF (splitOnChar "" . lines)
 
 
 -- This does conversion units at the front of the list
-toInt :: [Bool] -> Int
+toInt :: [Bool] -> Integer
 toInt [] = 0
 toInt bs = 2 * toInt (tail bs) + if head bs then 1 else 0
+
+
+fromInt :: Integer -> [Bool]
+fromInt 0 = [False]
+fromInt i = helper i
+  where
+    helper 0 = []
+    helper i = let (q,r) = i `divMod` 2 in (r==1) : helper q
+
+
+pad :: Integer -> a -> [a] -> [a]
+pad n b bs = replicate (fromIntegral n - length bs) b ++ take (fromIntegral n) bs
 
 
 -- Split a string into 2 at a character

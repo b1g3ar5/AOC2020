@@ -5,7 +5,7 @@ import Utils ( getLines, toInt )
 import Data.List ( (\\) )
 
 
-readLine :: String -> Int
+readLine :: String -> Integer
 readLine s = 8*r+c
   where
     (r, c) = (toInt $ (=='B') <$> reverse (take 7 s), toInt $ (=='R') <$> drop 7 s)
