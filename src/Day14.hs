@@ -7,11 +7,14 @@ import Utils
 
 import qualified Data.Map as M
 import Data.List
+import Control.Monad
+import Data.Bifunctor
+
 
 type Memory = M.Map Integer Integer
 
 type Bit = Bool
-type MBit = Maybe Bool
+type MBit = Maybe Bool -- 3 inhabitants
 type Mask = [MBit]
 type Address = Integer
 type Write = (Address, Integer)
@@ -19,10 +22,10 @@ type Set = (Mask, [Write])
 
 
 -- Rule for changing the int to write
-rule1 :: MBit -> Bit -> Bit
-rule1 Nothing b = b
-rule1 (Just False) _ = False
-rule1 (Just True) _ = True
+rule1 :: MBit -> Bit -> [Bit]
+rule1 Nothing b = [b]
+rule1 (Just False) _ = [False]
+rule1 (Just True) _ = [True]
 
 
 -- Rule for changing the address to write to
@@ -40,26 +43,18 @@ fromBits :: [Bool] -> Integer
 fromBits bs = toInt $ reverse bs
 
 
-apply :: Mask -> Write -> Write
-apply m (a, i) = (a, fromBits $ zipWith rule1 m $ toBits i)
-
-
-runSet1 :: Memory -> Set -> Memory
-runSet1 mem (mask, writes) = newmem `M.union` mem
-  where
-    newmem = M.fromList $ apply mask <$> writes
+apply1 :: Mask -> Write -> [Write]
+apply1 m (a, i) = (a,) . fromBits <$> zipWithM rule1 m (toBits i)
 
 
 apply2 :: Mask -> Write -> [Write]
-apply2 m (a, i) = (,i) . fromBits <$> sequence bss
-  where
-    bss = zipWith rule2 m $ toBits a
+apply2 m (a, i) = (,i) . fromBits <$> zipWithM rule2 m (toBits a)
 
 
-runSet2 :: Memory -> Set -> Memory
-runSet2 mem (mask, writes) = newmem `M.union` mem
+runSet :: (Mask -> Write -> [Write]) -> Memory -> Set -> Memory
+runSet f mem (mask, writes) = newmem `M.union` mem
   where
-    newmem = M.fromList $ concat $ apply2 mask <$> writes
+    newmem = M.fromList $ concat $ f mask <$> writes
 
 
 day14 :: IO ()
@@ -68,8 +63,8 @@ day14 = do
   let sets :: [Set]
       sets = parse s
 
-  putStrLn $ "Day14: Part1: " ++ show (sum $ foldl' runSet1 M.empty sets)
-  putStrLn $ "Day14: Part2: " ++ show (sum $ foldl' runSet2 M.empty sets)
+  putStrLn $ "Day14: Part1: " ++ show (sum $ foldl' (runSet apply1) M.empty sets)
+  putStrLn $ "Day14: Part2: " ++ show (sum $ foldl' (runSet apply2) M.empty sets)
 
 
 -- Paring the input...
