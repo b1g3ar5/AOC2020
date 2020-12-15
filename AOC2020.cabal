@@ -4,7 +4,7 @@ cabal-version: 1.12
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: faaf8b336c4d3bda940a8995f684d30b56e960aeff443f687fdcfac3426d4507
+-- hash: ae90fa63740872ae8146b2c034f808cc89b58c8c8235d0849dd21c01c178dcac
 
 name:           AOC2020
 version:        0.1.0.0
@@ -38,6 +38,8 @@ library
       Day13
       Day14
       Day15
+      Day15m
+      Day15v
       Day16
       Day17
       Day18
@@ -78,6 +80,7 @@ library
     , grids
     , hashable
     , lens
+    , massiv
     , megaparsec
     , mtl
     , semirings
@@ -112,6 +115,7 @@ executable AOC2020-exe
     , grids
     , hashable
     , lens
+    , massiv
     , megaparsec
     , mtl
     , semirings
@@ -148,6 +152,7 @@ test-suite AOC2020-test
     , grids
     , hashable
     , lens
+    , massiv
     , megaparsec
     , mtl
     , semirings

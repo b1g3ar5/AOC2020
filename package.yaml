@@ -37,6 +37,7 @@ dependencies:
 - lens
 - vector-space
 - grids
+- massiv
 
 library:
   source-dirs: src
