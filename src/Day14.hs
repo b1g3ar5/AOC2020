@@ -44,6 +44,7 @@ fromBits :: [Bool] -> Integer
 fromBits bs = toInt $ reverse bs
 
 
+-- Note: zipWithM does the 'sequence' call that we need
 apply :: Rule -> Mask -> Write -> [Write]
 apply f m (a, i) = (a,) . fromBits <$> zipWithM f m (toBits i)
 
