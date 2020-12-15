@@ -5,9 +5,10 @@ module Utils where
 
 import Debug.Trace
 
+
 getF :: (String -> a) -> Int -> IO a
 getF f n = do
-  s <- readFile $ "./Data/Day" ++ show n ++ ".txt"
+  s <- readFile $ "./Data/Day" ++ show n ++ ".in"
   return $ f s
 
 

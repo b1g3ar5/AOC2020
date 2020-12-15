@@ -9,6 +9,7 @@ import qualified Data.Map as M
 import Data.List
 import Control.Monad
 import Data.Bifunctor
+import Data.Tuple
 
 
 type Memory = M.Map Integer Integer
@@ -16,20 +17,20 @@ type Memory = M.Map Integer Integer
 type Bit = Bool
 type MBit = Maybe Bool -- 3 inhabitants
 type Mask = [MBit]
-type Address = Integer
-type Write = (Address, Integer)
+type Write = (Integer, Integer)
 type Set = (Mask, [Write])
 
 
+type Rule = MBit -> Bit -> [Bit]
 -- Rule for changing the int to write
-rule1 :: MBit -> Bit -> [Bit]
+rule1 :: Rule
 rule1 Nothing b = [b]
 rule1 (Just False) _ = [False]
 rule1 (Just True) _ = [True]
 
 
 -- Rule for changing the address to write to
-rule2 :: MBit -> Bit -> [Bit]
+rule2 :: Rule
 rule2 Nothing _ = [True, False]
 rule2 (Just False) b = [b]
 rule2 (Just True) _ = [True]
@@ -43,12 +44,12 @@ fromBits :: [Bool] -> Integer
 fromBits bs = toInt $ reverse bs
 
 
-apply1 :: Mask -> Write -> [Write]
-apply1 m (a, i) = (a,) . fromBits <$> zipWithM rule1 m (toBits i)
+apply :: Rule -> Mask -> Write -> [Write]
+apply f m (a, i) = (a,) . fromBits <$> zipWithM f m (toBits i)
 
 
 apply2 :: Mask -> Write -> [Write]
-apply2 m (a, i) = (,i) . fromBits <$> zipWithM rule2 m (toBits a)
+apply2 m t = swap <$> apply rule2 m (swap t)
 
 
 runSet :: (Mask -> Write -> [Write]) -> Memory -> Set -> Memory
@@ -63,7 +64,7 @@ day14 = do
   let sets :: [Set]
       sets = parse s
 
-  putStrLn $ "Day14: Part1: " ++ show (sum $ foldl' (runSet apply1) M.empty sets)
+  putStrLn $ "Day14: Part1: " ++ show (sum $ foldl' (runSet $ apply rule1) M.empty sets)
   putStrLn $ "Day14: Part2: " ++ show (sum $ foldl' (runSet apply2) M.empty sets)
 
 
