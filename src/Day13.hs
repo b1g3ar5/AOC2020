@@ -39,7 +39,11 @@ euclid [x] = x
 euclid (t1:t2:ts) = euclid $ rem2 t1 t2:ts
 
 
--- Reverse Euclidian algorithm?
+-- | Euclids algorithm:
+-- Given an x find and a st a*w=1 (ie. a modular inverse)
+-- GDC is:
+-- Given x and y find s and t st s*x+t*y = 1
+-- a sort of doulbe inverse.
 gcd2 :: (Integer, Integer) -> (Integer, Integer)
 gcd2 (_, 0) = (1, 0)
 gcd2 (a, b) = (t, s - q * t)
@@ -48,12 +52,18 @@ gcd2 (a, b) = (t, s - q * t)
     (s, t) = gcd2 (b, r)    
 
 
--- Given 2 numbers and their rems, work out the rem of the product of the numbers
--- We know that n1*m1+n2*m2=1 (that's what gcd2 does)
--- Look at x = a1*m2*n2+a2*n1*m1
--- x `mod` n1 = a1 * (n2*m2 `mod` n1) = a1 * 1 = a1
--- x `mod` n2 = a2 * (n1*m1 `mod` n2) = a2 * 1 = a2
--- as required so x is the number we want.
+-- | Given:
+-- z `mod` x1 = a1
+-- z `mod` x2 = a2
+-- Work out a12 st
+-- x `mod` x1*x2 = a12
+
+-- We find s, t st. s*x1+t*x2=1 (that's what gcd2 does)
+-- We claim that x = a1*t*x2 + a2*s*x1 works
+-- Mod both sides with x1
+-- x `mod` x1 = a1*(t*x2 `mod` x1) = a1*1,  as required
+-- Mod both sides with x2
+-- x `mod` x2 = a2*(s*x1 `mod` x2) = a2*1, as required
 rem2 :: (Integer, Integer) -> (Integer, Integer) -> (Integer, Integer)
 rem2 (n1, a1) (n2, a2) = (n1*n2, (a1*m2*n2+a2*m1*n1) `mod` (n1*n2))
   where
