@@ -63,6 +63,7 @@ type Range = (Int, Int)
 type Rule = (String, Range, Range)
 type Ticket = [Int]
 
+
 parse :: [String] -> ([Rule], Ticket, [Ticket])
 parse ls = (parseRule <$> head gps, parseTicket $ (gps!!1)!!1, parseTicket <$> tail (gps!!2))
   where
@@ -71,6 +72,7 @@ parse ls = (parseRule <$> head gps, parseTicket $ (gps!!1)!!1, parseTicket <$> t
 
 parseTicket :: String -> Ticket
 parseTicket s = read <$> splitOnStr "," s
+
 
 parseRule :: String -> Rule
 parseRule s = (head pieces, parseRange $ head rgs, parseRange $ rgs!!1)
