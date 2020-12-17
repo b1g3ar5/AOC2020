@@ -1,3 +1,5 @@
 # AOC2020
 
-I'm hoping to get to the end this year.
+Advent of Code challenges for 2020 in Haskell.
+
+Maybe I'll get to the end this year...
