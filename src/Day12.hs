@@ -52,9 +52,9 @@ apply2 ((sx, sy), (wx, wy) ) (d,n)
   where
     onLeft n = case n of 
                0 -> ((sx, sy), (wx, wy))
-               90 -> ((sx, sy), (wy, -wx))
-               180 -> ((sx, sy), (-wx, -wy))
-               270 -> ((sx, sy), (-wy, wx))
+               90 -> ((sx, sy), (wy, -wx)) -- x*(-i)
+               180 -> ((sx, sy), (-wx, -wy)) -- x*(-1)
+               270 -> ((sx, sy), (-wy, wx)) -- x*i
                _  -> error $ "I didn't code L: " ++ show n
 
 day12 :: IO ()

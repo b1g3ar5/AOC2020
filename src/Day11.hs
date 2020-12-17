@@ -1,9 +1,13 @@
 module Day11 where
 
 
-import Utils ( getLines, Coord, neighbourCoords, at, race, directions, add )
+import Utils ( getLines, Coord, neighbourCoords, at, race, directions, add, fixpoint )
 import Data.Map ( Map, (!?), fromList, notMember, mapWithKey, (!) )
 import System.TimeIt ( timeIt )
+
+
+-- | Straight forward version mapping the rules over the grid
+-- The grid is represented with a map
 
 
 type Grid a = Map Coord a
@@ -40,19 +44,12 @@ rule2 g c
     isOccupied c = g ! c == '#'
 
 
-
 stepUntil :: (Grid Char -> Coord -> Char) -> Grid Char -> Grid Char
-stepUntil r = go
-  where
-    go g
-      | nxt == g = g
-      | otherwise = go nxt
-      where
-        nxt = step r g
+stepUntil f = fixpoint (step f)
 
 
 step :: (Map t a -> t -> b) -> Map t a -> Map t b
-step r g = mapWithKey (\k _ -> r g k) g
+step f g = mapWithKey (\k _ -> f g k) g
 
 
 day11 :: IO ()

@@ -3,16 +3,16 @@
 module Day14 where
 
 
-import Utils
+import Utils ( fromInt, getRaw, pad, splitOnStr, toInt )
 
 import qualified Data.Map as M
-import Data.List
-import Control.Monad
-import Data.Bifunctor
-import Data.Tuple
+import Data.List ( foldl' )
+import Control.Monad ( zipWithM )
+import Data.Tuple ( swap )
 
 
 type Memory = M.Map Integer Integer
+
 
 type Bit = Bool
 type MBit = Maybe Bool -- 3 inhabitants
@@ -22,6 +22,8 @@ type Set = (Mask, [Write])
 
 
 type Rule = MBit -> Bit -> [Bit]
+
+
 -- Rule for changing the int to write
 rule1 :: Rule
 rule1 Nothing b = [b]
@@ -45,6 +47,7 @@ fromBits bs = toInt $ reverse bs
 
 
 -- Note: zipWithM does the 'sequence' call that we need
+-- to make all the lists
 apply :: Rule -> Mask -> Write -> [Write]
 apply f m (a, i) = (a,) . fromBits <$> zipWithM f m (toBits i)
 

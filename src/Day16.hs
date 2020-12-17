@@ -1,3 +1,9 @@
+{-# LANGUAGE DataKinds #-}
+{-# LANGUAGE OverloadedLists #-}
+{-# LANGUAGE PolyKinds #-}
+{-# LANGUAGE ScopedTypeVariables #-}
+
+
 module Day16 where
 
 
@@ -5,23 +11,26 @@ import Utils ( getLines, splitOnStr )
 import Data.List ( intersect, sortOn, transpose )
 import Data.Bifunctor (second)
 
-
--- Numbers in the ticket that break all the rules
+-- | Numbers that break all the rules
 notValid :: [Rule] -> Ticket -> [Int]
 notValid rs t = foldr1 intersect $ (t `breakers`) <$> rs
 
 
--- Numbers in the ticket that break a rule
+-- | Numbers that break a rule
 breakers :: Ticket -> Rule -> [Int]
-breakers ns (_, (l1, h1), (l2, h2)) = filter (\n -> (n<l1 || n >h1) && (n<l2 || n>h2)) ns
+breakers t r = filter (`ruleFail` r) t
 
 
--- Rules that the numbers don't break
+ruleFail :: Int -> Rule -> Bool
+ruleFail n (_, (l1, h1), (l2, h2)) = (n<l1 || n>h1) && (n<l2 || n>h2)
+
+
+-- | Rules that the numbers don't break
 possibleRules :: [Rule] -> [Int] -> [Rule]
 possibleRules rs ns = filter (null . breakers ns) rs
 
 
--- Given a list of the rules that might work in each position
+-- | Given a list of the rules that might work in each position
 -- allocate all the rules to a position that they work in
 allocate :: [[Rule]] -> [(Int, Rule)]
 allocate rs = second head <$> go [] sorted
@@ -30,11 +39,13 @@ allocate rs = second head <$> go [] sorted
     sorted = sortOn (\(_,r) -> length r) $ zip [0..] rs
     -- For each rule set take the first rule and add it to the 
     -- accumulated list, delete it from the sets remaining and loop
+    -- This simple method worked - but it might not have then what?
+    -- The next step might have been to see if any rules had just one position
+    -- ie the same approach on the transpose...  
     go acc [] = acc
     go acc (r:rs) = go (acc ++ [r]) $ second (filter (/= f)) <$> rs
       where
         f = head $ snd r
-
 
 
 day16 :: IO ()
@@ -53,9 +64,10 @@ day16 = do
       -- The "departure" field indexes
       departureFieldIxs = fst <$> filter (\(_, (n,_,_)) -> "departure" == take 9 n) allocation
 
+
   putStrLn $ "Day16: part1: " ++ show (sum $ concat $ notValid rules <$> tickets)
   putStrLn $ "Day16: part2: " ++ show (product $ (myTicket!!) <$> departureFieldIxs)
-
+  
 
 -- Parsing...
 

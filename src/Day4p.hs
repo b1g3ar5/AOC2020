@@ -12,10 +12,8 @@ day4p = do
   inString <- getRaw 4
   let ps :: [PassportData]
       ps = either (const []) id $ runP parsePassports inString
-  let valids1 = filter valid1 ps
-  let valids2 = filter valid2 ps
-  putStrLn $ "Day4p: part1: " ++ show (length valids1)
-  putStrLn $ "Day4p: part2: " ++ show (length valids2)
+  putStrLn $ "Day4p: part1: " ++ show (length $ filter valid1 ps)
+  putStrLn $ "Day4p: part2: " ++ show (length $ filter valid2 ps)
 
 
 type PassportData = [(Field, String)]

@@ -2,7 +2,7 @@ module Day10 where
 
 
 import Utils ( getLines )
-import Data.List ( group, sort, foldl', sortOn, groupBy )
+import Data.List ( group, sort, foldl' )
 import Memo ( memoise )
 import System.TimeIt ( timeIt )
 

@@ -7,7 +7,7 @@ import qualified Data.List as L
 import Data.Semiring
 import Utils
 
-alphabet = "abcdefghijklmnopqrstuvwxyz"
+alphabet = ['a'..'z']
 
 
 day6 :: IO ()
@@ -22,15 +22,17 @@ day6 = do
   -- With a semiring instance. Why not?
   let hs :: [[Set]]
       hs = (mkSet <$>) <$> gs
+      apply :: ([Set] -> Set) -> [[Set]] -> Int
+      apply f xs = L.sum $ size . f <$> xs
       d1, d2 :: Int
-      d1 = L.sum $ order . sum <$> hs
-      d2 = L.sum $ order . product <$> hs
+      d1 = apply sum  hs
+      d2 = apply product hs
 
   putStrLn $ "Day6: part1: " ++ show d1
   putStrLn $ "Day6: part2: " ++ show d2
 
 
--- A newtype so we can add a monooid instance
+-- A newtype so we can add a semiring instance
 newtype Set = Set String
 
 
@@ -39,8 +41,8 @@ mkSet :: String -> Set
 mkSet xs = Set $ L.nub xs
 
 -- We need the size of the set
-order :: Set -> Int
-order (Set xs) = L.length xs
+size :: Set -> Int
+size (Set xs) = L.length xs
 
 
 instance Semiring Set where

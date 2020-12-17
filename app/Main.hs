@@ -12,7 +12,6 @@ import Day5
 import Day6
 import Day7
 import Day7s
-import Day7l
 import Day8
 import Day9
 import Day10
@@ -28,6 +27,7 @@ import Day15v
 import Day15m
 import Day16
 import Day17
+import Day17m
 import Day18
 import Day19
 import Day20
@@ -50,7 +50,6 @@ main = do
   --day6
   --day7s
   --day7
-  --day7l
   --day8
   --day9
   --day10
@@ -62,9 +61,10 @@ main = do
   --day14
   --day15m
   --day15v
-  day16
+  --day16
   --day17
-  --day18
+  --day17m
+  day18
   --day19
   --day20
   --day21

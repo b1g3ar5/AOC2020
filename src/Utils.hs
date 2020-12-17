@@ -3,7 +3,18 @@
 
 module Utils where
 
-import Debug.Trace
+
+fix :: Eq a => (a -> a) -> a
+fix f = x where x = f x
+
+
+-- Should this just call fix somehow?
+fixpoint :: Eq a => (a -> a) -> a -> a
+fixpoint f x 
+  | x ==fx = fx
+  | otherwise = fixpoint f fx
+  where
+    fx = f x
 
 
 getF :: (String -> a) -> Int -> IO a

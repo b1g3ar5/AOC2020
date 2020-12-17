@@ -54,7 +54,6 @@ instance Read Colour where
   readsPrec _ _ = []  
 
 
-
 boundsCheck :: Int -> Int -> String -> Bool
 boundsCheck mn mx s = (n>=mn) && (n<=mx) 
   where
@@ -129,6 +128,7 @@ validField HCL = hclOK
 validField HGT = hgtOK
 validField IYR = iyrOK
 validField PID = pidOK
+
 
 getPassportData :: [String] -> [PassportData]
 getPassportData ss = (first read <$>) . (split1 ':' <$>) . words . unwords <$> splitOnStr [""] ss

@@ -11,7 +11,7 @@ type Env = (Coord, Vector (Vector Bool))
 
 
 -- This doesn't need to check bounds because the go function
--- checks the hieght and uses `mod` on the width
+-- checks the height and uses `mod` on the width
 (!) :: Vector (Vector a) -> Coord -> a
 v ! (x, y) = (v V.! y) V.! x
 

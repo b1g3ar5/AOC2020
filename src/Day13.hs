@@ -41,9 +41,9 @@ euclid (t1:t2:ts) = euclid $ rem2 t1 t2:ts
 
 -- | Euclids algorithm:
 -- Given an x find and a st a*w=1 (ie. a modular inverse)
--- GDC is:
+-- GCD2 is:
 -- Given x and y find s and t st s*x+t*y = 1
--- a sort of doulbe inverse.
+-- a sort of inverse for 2 numbers
 gcd2 :: (Integer, Integer) -> (Integer, Integer)
 gcd2 (_, 0) = (1, 0)
 gcd2 (a, b) = (t, s - q * t)

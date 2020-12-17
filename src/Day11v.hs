@@ -8,22 +8,23 @@
 module Day11v where
 
 
---import System.Console.ANSI
 import Data.List ( intercalate)
 import Data.Grid ( autoConvolute, omitBounds, fromNestedLists', toNestedLists, partitionFocus, Grid, IsGrid )
 import Data.Grid.Internal.Convolution ()
 import Data.Grid.Internal.Shapes ( Centered )
-import Data.Functor.Compose
-import Data.Foldable
-import Control.Monad
-import Data.Maybe
-import GHC.TypeNats
-import System.TimeIt
+import Data.Functor.Compose ( Compose(Compose, getCompose) )
+import Data.Foldable ( Foldable(toList) )
+import Control.Monad ( join )
+import Data.Maybe ( fromJust, isJust )
+import GHC.TypeNats ( KnownNat )
+import System.TimeIt ( timeIt )
+import Utils ( getLines, fixpoint )
 
-import Utils
 
--- I can't get this to work with Ordinal - only with wrapped grid
--- So it's no good - going to try with linear V...
+-- | Using another grid library with fixed size grids and boundary options
+-- This time it works, but it's a bit slow - about 15s for part 1.
+-- I've not obthered to implement part 2 again.
+
 
 readSeats :: [String] -> [((Integer, Integer), Char)]
 readSeats css = concat $ (\(row, cs) -> (\(col, c) -> ((col, row), c)) <$> zip [0..] cs) <$> zip [0..] css
@@ -35,7 +36,7 @@ day11v = do
   --let ls = test
   let g :: Grid '[90, 95] Char
       g = fromNestedLists' ls
-      final = loop g
+      final = fixpoint step g
 
   timeIt $ putStrLn $ "Day11v: part1: " ++ show (count (=='#') final)
 
@@ -55,12 +56,6 @@ test = ["L.LL.LL.LL"
   , "LLLLLLLLLL"
   , "L.LLLLLL.L"
   , "L.LLLLL.LL"]
-
-
-loop :: (KnownNat x, KnownNat y) => Grid '[x, y] Char -> Grid '[x, y] Char
-loop g = if g == nxt then g else loop nxt
-  where
-    nxt = step g
 
 
 showGrid :: (IsGrid '[x, y]) => Grid '[x, y] Char -> String

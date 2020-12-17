@@ -9,20 +9,20 @@
 module Day11g where
 
 
-import Control.Comonad
-import Control.Lens
-import Control.Comonad.Store
---import Data.AdditiveGroup
-import Data.AffineSpace
-import GHC.TypeLits
+import Control.Comonad ( Comonad(extract, extend) )
+import Control.Lens ( (&), (.~), over )
+import Control.Comonad.Store ( ComonadStore(pos, peek) )
+import Data.AffineSpace ( AffineSpace(Diff, (.+^)) )
+import GHC.TypeLits ( KnownNat )
 import qualified GHC.TypeLits as GHC
---import System.Console.ANSI
 import SizedGrid
 import Data.List (foldl', transpose)
 
 
 -- I can't get this to work with Ordinal - only with wrapped grid
 -- So it's no good - going to try with linear V...
+-- Also, look at the constraints!! Mabe this llibrary is too difficult for me.
+
 
 readSeats :: [String] -> [((Integer, Integer), Char)]
 readSeats css = concat $ (\(row, cs) -> (\(col, c) -> ((col, row), c)) <$> zip [0..] cs) <$> zip [0..] css
