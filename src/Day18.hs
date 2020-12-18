@@ -4,6 +4,7 @@ module Day18 where
 import Utils ( getLines )
 import Data.Bifunctor ( Bifunctor(first) )
 
+
 day18 :: IO ()
 day18 = do
   ls <- getLines 18

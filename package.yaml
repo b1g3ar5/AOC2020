@@ -37,6 +37,7 @@ dependencies:
 - vector-space
 - grids
 - massiv
+- parsec
 
 library:
   source-dirs: src
