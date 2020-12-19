@@ -31,6 +31,7 @@ import Day17m
 import Day18
 import Day18p
 import Day19
+import Day19p
 import Day20
 import Day21
 import Day22
@@ -65,9 +66,10 @@ main = do
   --day16
   --day17
   --day17m
-  day18
-  day18p
+  --day18
+  --day18p
   --day19
+  day19p
   --day20
   --day21
   --day22

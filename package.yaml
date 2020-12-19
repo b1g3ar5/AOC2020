@@ -38,6 +38,7 @@ dependencies:
 - grids
 - massiv
 - parsec
+- unordered-containers
 
 library:
   source-dirs: src
@@ -49,6 +50,7 @@ executables:
     ghc-options:
     - -threaded
     - -rtsopts
+    - -O2
     - -with-rtsopts=-N
     dependencies:
     - AOC2020

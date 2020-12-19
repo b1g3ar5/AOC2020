@@ -4,7 +4,7 @@ cabal-version: 1.12
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: cd8f6f8cdb44ec72630c5b866ac5eba73bd80362ea9bd9196620888c331b4251
+-- hash: d8cdc7f16c5228ccfc3f2f9017e73f660cb99f3d06a72443bc473d158ebc492a
 
 name:           AOC2020
 version:        0.1.0.0
@@ -46,6 +46,7 @@ library
       Day18
       Day18p
       Day19
+      Day19p
       Day2
       Day20
       Day21
@@ -92,6 +93,7 @@ library
     , tasty-hunit
     , tasty-quickcheck
     , timeit
+    , unordered-containers
     , vector
     , vector-space
   default-language: Haskell2010
@@ -102,7 +104,7 @@ executable AOC2020-exe
       Paths_AOC2020
   hs-source-dirs:
       app
-  ghc-options: -threaded -rtsopts -with-rtsopts=-N
+  ghc-options: -threaded -rtsopts -O2 -with-rtsopts=-N
   build-depends:
       AOC2020
     , Clever
@@ -127,6 +129,7 @@ executable AOC2020-exe
     , tasty-hunit
     , tasty-quickcheck
     , timeit
+    , unordered-containers
     , vector
     , vector-space
   default-language: Haskell2010
@@ -164,6 +167,7 @@ test-suite AOC2020-test
     , tasty-hunit
     , tasty-quickcheck
     , timeit
+    , unordered-containers
     , vector
     , vector-space
   default-language: Haskell2010

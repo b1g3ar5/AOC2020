@@ -39,8 +39,8 @@ day17 = do
       g3_6 = iterate (step3 basicRule3) g3 !! 6
       g4_6 = iterate (step4 basicRule4) g4 !! 6
   
-  timeIt $ putStrLn $ "part1: " ++ show (count3 g3_6)
-  timeIt $ putStrLn $ "part2: " ++ show (count4 g4_6)
+  timeIt $ putStrLn $ "Day17: part1: " ++ show (count3 g3_6)
+  timeIt $ putStrLn $ "Day17: part2: " ++ show (count4 g4_6)
 
 
 type Coord3 = (Int, (Int, Int))
