@@ -9,7 +9,6 @@ import Data.List ( foldl', nub, delete )
 import qualified Data.HashSet as S
 import Data.Hashable ( Hashable )
 import Control.Monad (replicateM)
-import System.TimeIt ( timeIt )
 
 
 -- | Reimplemented with a simple HashSet to make it quicker - still slow 2s for part 2  = 3-4s
@@ -36,8 +35,8 @@ day17m = do
       
       gend4 = iterate (step (neighbourCoords4 `at4`) $ basicRule (neighbourCoords4 `at4`)) g4 !! 6
 
-  timeIt $ putStrLn $ "Day17m: part1: " ++ show (S.size gend3)
-  timeIt $ putStrLn $ "Day17m: part2: " ++ show (S.size gend4)
+  putStrLn $ "Day17m: part1: " ++ show (S.size gend3)
+  putStrLn $ "Day17m: part2: " ++ show (S.size gend4)
   
 
 type Grid a = S.HashSet a

@@ -23,7 +23,7 @@ import Utils ( getLines, fixpoint )
 
 -- | Using another grid library with fixed size grids and boundary options
 -- This time it works, but it's a bit slow - about 15s for part 1.
--- I've not obthered to implement part 2 again.
+-- I've not bothered to implement part 2 again.
 
 
 readSeats :: [String] -> [((Integer, Integer), Char)]

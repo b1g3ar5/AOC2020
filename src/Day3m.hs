@@ -7,7 +7,7 @@ import qualified Data.Vector as V ((!))
 import Control.Monad.Reader (asks, runReader, Reader)
 
 
--- A version, just tfor practise, using the reader monad for the environment
+-- A version, just for practise, using the reader monad for the environment
 -- We don't need to change it so we don't need state
 
 data Env = Env { bounds :: Coord, ground ::Vector (Vector Bool)} deriving (Show)

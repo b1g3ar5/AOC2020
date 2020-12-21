@@ -33,8 +33,8 @@ day7s :: IO ()
 day7s = do
   ls <- getLines 7
   let bs = parse <$> ls
-  putStrLn $ "Day7: part1: " ++ show (length $ filter (doesItNeed bs) bs)
-  putStrLn $ "Day7: part2: " ++ show (howManyDoesItNeed bs (head $ filter (\(Bag x _) -> x == "shiny gold") bs)-1)
+  putStrLn $ "Day7s: part1: " ++ show (length $ filter (doesItNeed bs) bs)
+  putStrLn $ "Day7s: part2: " ++ show (howManyDoesItNeed bs (head $ filter (\(Bag x _) -> x == "shiny gold") bs)-1)
 
 
 doesItNeed :: [Bag] -> Bag -> Bool

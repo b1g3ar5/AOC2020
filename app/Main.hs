@@ -7,7 +7,6 @@ import Day3m
 import Day3s
 import Day3vs
 import Day4
-import Day4p
 import Day5
 import Day6
 import Day7
@@ -32,6 +31,7 @@ import Day18
 import Day18p
 import Day19
 import Day19p
+import Day19g
 import Day20
 import Day21
 import Day22
@@ -47,7 +47,6 @@ main = do
   --day3s
   --day3vs
   --day4
-  --day4p
   --day5
   --day6
   --day7s
@@ -69,9 +68,10 @@ main = do
   --day18
   --day18p
   --day19
-  day19p
+  --day19p
+  --day19g
   --day20
-  --day21
+  day21
   --day22
   --day23
   --day24

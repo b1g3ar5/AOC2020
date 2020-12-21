@@ -27,9 +27,9 @@ day13 = do
       buses :: [(Integer, Integer)]
       buses = sortOn (Down . fst) $ (\(x, y) -> (y, (y-x) `mod` y)) . second read <$> filter (\(_,y)-> y /= "x") (zip [0..] $ splitOnStr "," (ls!!1))
 
-  putStrLn $ "day12: part1: " ++ show (uncurry (*) $ head $ (\x -> (x * (1 + target `div` x) - target,x)) . fst <$> buses) 
-  putStrLn $ "day12: part2: Seive: " ++ show (fst $ seive (1,1) buses) 
-  putStrLn $ "day12: part2: Euclid: " ++ show (snd $ euclid buses) 
+  putStrLn $ "Day13: part1: " ++ show (uncurry (*) $ head $ (\x -> (x * (1 + target `div` x) - target,x)) . fst <$> buses) 
+  putStrLn $ "Day13: part2: Seive: " ++ show (fst $ seive (1,1) buses) 
+  putStrLn $ "Day13: part2: Euclid: " ++ show (snd $ euclid buses) 
 
 
 -- Maths...

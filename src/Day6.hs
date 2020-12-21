@@ -12,7 +12,7 @@ alphabet = ['a'..'z']
 
 day6 :: IO ()
 day6 = do
-  gs <- getGroups 6
+  gs <- getParagraphs 6
   let c1 = L.sum $ length . foldl L.union [] <$> gs
       c2 = L.sum $ length . foldl L.intersect alphabet <$> gs
 

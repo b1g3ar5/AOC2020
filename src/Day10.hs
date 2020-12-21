@@ -4,7 +4,6 @@ module Day10 where
 import Utils ( getLines )
 import Data.List ( group, sort, foldl' )
 import Memo ( memoise )
-import System.TimeIt ( timeIt )
 
 
 countGaps :: [Int] -> Int
@@ -64,7 +63,7 @@ day10 = do
       p2 = product $ zipWith (^) [1,1,2,4,7] $ length <$> group (sort $ length <$> split xs)
 
   
-  timeIt $ putStrLn $ "Day10: part1: " ++ show (countGaps xs)
-  timeIt $ putStrLn $ "Day10: part2: splitting: " ++ show (product $ countPerms <$> split xs)
-  timeIt $ putStrLn $ "Day10: part2: memoisation: " ++ show (countPerms2 xs)
-  timeIt $ putStrLn $ "Day10: part2: maths: " ++ show p2
+  putStrLn $ "Day10: part1: " ++ show (countGaps xs)
+  putStrLn $ "Day10: part2: splitting: " ++ show (product $ countPerms <$> split xs)
+  putStrLn $ "Day10: part2: memoisation: " ++ show (countPerms2 xs)
+  putStrLn $ "Day10: part2: maths: " ++ show p2

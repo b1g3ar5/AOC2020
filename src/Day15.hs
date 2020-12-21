@@ -38,6 +38,6 @@ day15 = do
   let ns :: [Key]
       ns = [0,1,4,13,15,12,16]
 
-  timeIt $ putStrLn $ "Day15: part1: " ++ show (get $ makeMap 2020 ns)
+  putStrLn $ "Day15: part1: " ++ show (get $ makeMap 2020 ns)
   --timeIt $ putStrLn $ "Day15: " ++ show (get $ makeMap 30000000 ns)
 

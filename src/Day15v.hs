@@ -18,8 +18,8 @@ day15v = do
   let seeds :: [Int]
       seeds = [0,1,4,13,15,12,16]
   
-  timeIt $ putStrLn $ "day15v: part1: Vector: " ++ show (run seeds 2020)
-  timeIt $ putStrLn $ "day15v: part1: Vector: " ++ show (run seeds 30000000)
+  putStrLn $ "day15v: part1: Vector: " ++ show (run seeds 2020)
+  putStrLn $ "day15v: part1: Vector: " ++ show (run seeds 30000000)
 
 
 run :: [Int] -> Int -> Int

@@ -20,7 +20,7 @@ day5 = do
       frontRow = [48..55]
       possibles = [0..(8*128 - 1)] \\ (ids ++ missingSeats  ++ frontRow)
   putStrLn $ "Day5: part1: " ++ show mid
-  putStrLn $ "Day5: part2: " ++ show possibles
+  putStrLn $ "Day5: part2: " ++ show (head possibles)
 
 
 

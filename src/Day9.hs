@@ -3,7 +3,6 @@ module Day9 where
 
 import Utils ( getLines )
 import Data.Maybe ( fromJust )
-import System.TimeIt
 
 
 twinSum :: [Int] -> Int -> Bool
@@ -44,5 +43,5 @@ day9 = do
       rng = findWindow target ns
 
   putStrLn $ "Day9: part1: " ++ show target
-  timeIt $ putStrLn $ "Day9: part2: " ++ show (minimum rng + maximum rng)
+  putStrLn $ "Day9: part2: " ++ show (minimum rng + maximum rng)
 

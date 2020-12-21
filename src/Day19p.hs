@@ -64,7 +64,7 @@ day19p = do
       check :: String -> Bool
       check s = isRight $ parse (messageP >> eof) "" s
 
-  putStrLn $ "Lines: " ++ show ( length $ filter id $ check <$> messages)
+  putStrLn $ "Day19p: part1: " ++ show ( length $ filter id $ check <$> messages)
 
     
   let p42, p31, p :: Parser ()
@@ -78,6 +78,6 @@ day19p = do
       check2 :: String -> Bool
       check2 s = isRight $ parse (p >> eof) "" s
 
-  putStrLn $ "Lines: " ++ show ( length $ filter id $ check2 <$> messages)
+  putStrLn $ "Day19p: part2: " ++ show ( length $ filter id $ check2 <$> messages)
 
   return ()

@@ -1,7 +1,7 @@
 module Day11 where
 
 
-import Utils ( getLines, Coord, neighbourCoords, at, race, directions, add, fixpoint )
+import Utils ( getLines, Coord(..), neighbourCoords, at, race, directions, fixpoint )
 import Data.Map ( Map, (!?), fromList, notMember, mapWithKey, (!) )
 import System.TimeIt ( timeIt )
 
@@ -39,7 +39,7 @@ rule2 g c
     cell = g ! c
 
     seatsOccupied :: Int
-    seatsOccupied = length $ filter id ((\d -> race isFinished isOccupied c (`add`d)) <$> directions)
+    seatsOccupied = length $ filter id ((\d -> race isFinished isOccupied c (+ d)) <$> directions)
     isFinished c =  notMember c g || g ! c == 'L'
     isOccupied c = g ! c == '#'
 

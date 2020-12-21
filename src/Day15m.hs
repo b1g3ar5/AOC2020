@@ -18,8 +18,8 @@ day15m:: IO ()
 day15m = do
   let seeds32 :: [Int32]
       seeds32 = [0,1,4,13,15,12,16]
-  timeIt $ putStrLn $ "day15v: part1: Massiv: " ++ show (work 2020 seeds32)
-  timeIt $ putStrLn $ "day15v: part2: Massiv: " ++ show (work 30000000 seeds32)
+  putStrLn $ "day15m: part1: Massiv: " ++ show (work 2020 seeds32)
+  putStrLn $ "day15m: part2: Massiv: " ++ show (work 30000000 seeds32)
   
 
 type Task = [Int32]

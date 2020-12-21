@@ -89,8 +89,8 @@ day7 = do
   ls <- getLines 7
   let bags = M.fromList $ parseLine <$> ls
 
-  putStrLn $ "\npart1: " ++ show (length (hylo insideHowMany makeBag ("shiny gold", reverse bags)) - 1)
-  putStrLn $ "\npart2: " ++ show (hylo howManyInside makeBag ("shiny gold", bags) - 1)
+  putStrLn $ "Day7: part1: " ++ show (length (hylo insideHowMany makeBag ("shiny gold", reverse bags)) - 1)
+  putStrLn $ "Day7: part2: " ++ show (hylo howManyInside makeBag ("shiny gold", bags) - 1)
 
 
 parseLine :: String -> (Colour, [(Int, Colour)])

@@ -17,7 +17,6 @@ import Data.Distributive (Distributive(..))
 import Data.Functor.Compose (Compose(..))
 import Data.Functor.Rep (Representable(..), distributeRep)
 import Data.Maybe ()
-import System.TimeIt ( timeIt )
 
 
 {-
@@ -40,15 +39,13 @@ gCols :: Int
 gCols = 95
 inBounds :: Coord -> Bool
 inBounds (x,y) = x >= 0 && y >= 0 && x < gCols && y < gRows
-allCoords :: [[(Int, Int)]]
-allCoords = (\c -> (c,) <$> [0..(gRows-1)]) <$> [0..(gCols-1)]
 
 
 type Grid a = Store (Compose HV VV) a
 
 
 instance Eq a => Eq (Grid a) where
-  g == h = and $ (\c -> peek c g == peek c h) <$> concat allCoords
+  g == h = and $ (\c -> peek c g == peek c h) <$> allCoords gRows gCols
 
 
 instance Show (Grid Char) where
@@ -107,7 +104,7 @@ instance Representable VV where
 
 
 count :: (a -> Bool) -> Grid a -> Int
-count p g = length $ filter p $ (`peek` g) <$> concat allCoords
+count p g = length $ filter p $ (`peek` g) <$> allCoords gRows gCols
 
 
 step :: Rule a -> Grid a -> Grid a
@@ -136,13 +133,13 @@ rule2 g
     cell = extract g
 
     seatsOccupied :: Int
-    seatsOccupied = length $ filter id ((\d -> race isFinished isOccupied (pos g) (`add`d)) <$> directions)
+    seatsOccupied = length $ filter id ((\d -> race isFinished isOccupied (pos g) (+ d)) <$> directions)
     isFinished c = not (inBounds c) || c `peek` g == 'L'
     isOccupied c = c `peek` g == '#'
 
 
 safeAt :: [Coord] -> Coord -> [Coord]
-coords `safeAt` origin = filter inBounds $ map (add origin) coords
+coords `safeAt` origin = filter inBounds $ map (+ origin) coords
 
 
 stepUntil :: Eq a => Rule a -> Grid a -> Grid a
@@ -159,8 +156,8 @@ day11s :: IO ()
 day11s = do
   ls <- getLines 11
   let g = readSeats ls
-  timeIt $ putStrLn $ "Day11s: Part1: " ++ show (count (== '#') $ stepUntil rule1 g)
-  timeIt $ putStrLn $ "Day11s: Part2: " ++ show (count (== '#') $ stepUntil rule2 g)
+  putStrLn $ "Day11s: Part1: " ++ show (count (== '#') $ stepUntil rule1 g)
+  putStrLn $ "Day11s: Part2: " ++ show (count (== '#') $ stepUntil rule2 g)
 
 
 readSeats :: [String] -> Grid Char
