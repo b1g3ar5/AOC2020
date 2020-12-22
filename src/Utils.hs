@@ -99,7 +99,7 @@ split1 ch = go []
 
 -- Like words but you specify the character
 splitOnChar :: Eq a => a -> [a] -> [[a]]
-splitOnChar c = go []
+splitOnChar c = reverse . go []
   where
     go acc [] = acc
     go [] (x:xs)
