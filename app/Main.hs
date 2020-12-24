@@ -72,9 +72,9 @@ main = do
   --day19g
   --day20
   --day21
-  day22
+  --day22
   --day23
-  --day24
+  day24
 
 
 

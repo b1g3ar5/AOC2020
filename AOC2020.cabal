@@ -4,7 +4,7 @@ cabal-version: 1.12
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: 70e265e219ab9cd875b8d5d0b2e81eb488b4cdcbbd335eaa06c5456898715f82
+-- hash: c02ca1a0649951b1443121ccd01ae56b1fce833475ec8dc2b44262b143f89ddc
 
 name:           AOC2020
 version:        0.1.0.0
@@ -65,6 +65,7 @@ library
       Day7s
       Day8
       Day9
+      FDList
       Utils
   other-modules:
       Paths_AOC2020
