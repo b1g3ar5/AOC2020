@@ -4,7 +4,7 @@ cabal-version: 1.12
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: c02ca1a0649951b1443121ccd01ae56b1fce833475ec8dc2b44262b143f89ddc
+-- hash: c35cab92f5eba269830ab3f3fe1d0ae740875358e2e663f996c45da779721c2f
 
 name:           AOC2020
 version:        0.1.0.0
@@ -54,6 +54,7 @@ library
       Day22
       Day23
       Day24
+      Day25
       Day3
       Day3m
       Day3s
@@ -74,6 +75,7 @@ library
   build-depends:
       Clever
     , adjunctions
+    , arithmoi
     , base >=4.7 && <5
     , comonad
     , containers
@@ -110,6 +112,7 @@ executable AOC2020-exe
       AOC2020
     , Clever
     , adjunctions
+    , arithmoi
     , base >=4.7 && <5
     , comonad
     , containers
@@ -148,6 +151,7 @@ test-suite AOC2020-test
       AOC2020
     , Clever
     , adjunctions
+    , arithmoi
     , base >=4.7 && <5
     , comonad
     , containers

@@ -28,6 +28,7 @@ import qualified TotalMap as M
 
 data Dir = E | SE | SW | W | NW | NE deriving (Eq, Show)
 
+
 readDir :: String -> Dir
 readDir s
   | s == "e" = E
@@ -46,6 +47,7 @@ toCoord SE = (1, 1)
 toCoord NW = (-1, -1)
 toCoord SW = (-1, 1)
 
+
 parseLine :: String -> [Dir]
 parseLine [] = []
 parseLine [c]
@@ -63,7 +65,6 @@ parseLine (c:d:cs)
 allcoords = [(x, y) | x<-[-200..200], y<-[-100..100], even (x+y)]
 
 
-
 day24 :: IO ()
 day24 = do
   ls <- getLines 24
@@ -75,28 +76,12 @@ day24 = do
   let black :: [Coord]
       black = (head <$>) <$> filter (\xs -> length xs /= 2) $ group (sort $ sum . (toCoord <$>) <$> ds)
       g :: Grid
-      --g = M.fromPartial False $ M.fromList $ (, True) <$> black
       g = M.fromPartial False $ M.fromList $ (\c -> (c,c `elem` black)) <$> allcoords
-      g1 = apply basicRule g
-      g2 = apply basicRule g1
-      g3 = apply basicRule g2
-      g4 = apply basicRule g3
-      g100 = (iterate (apply basicRule) g) !! 100
-  --putStrLn $ "Day24: part2: " ++ show black
-  --putStrLn $ "Day24: part2: " ++ show mp
-  --putStrLn $ "Day24: part2: " ++ showGrid g
-  --putStrLn $ "Day24: part2: " ++ showGrid g
-  --putStrLn $ "Day24: part2: " ++ showGrid g1
-  putStrLn $ "Day24: part2: " ++ show (count $ (iterate (apply basicRule) g) !! 100)
-
-
-
-  return ()
+  putStrLn $ "Day24: part2: " ++ show (count $ iterate (apply basicRule) g !! 100)
 
 
 neighbourCoords :: [Coord]
 neighbourCoords = [(2, 0), (-2, 0), (1, -1), (1, 1), (-1, -1), (-1, 1)]
-
 
 
 apply :: Rule -> Grid -> Grid
@@ -116,17 +101,13 @@ basicRule g hex = (not alive && neighboursAlive == 2) || (alive && (neighboursAl
     neighbours = (+ hex) <$> neighbourCoords
     neighboursAlive = length $ filter id $ (g M.!) <$> neighbours
 
-{-
-Any black tile with zero or more than 2 black tiles immediately adjacent to it is flipped to white.
-Any white tile with exactly 2 black tiles immediately adjacent to it is flipped to black.
--}
-
 
 count :: Grid -> Int
 count tmp = foldMap (bool 0 1) mp 
   where
     mp :: M.Map Coord Bool
     mp = M._map tmp
+
 
 showGrid :: Grid -> String
 showGrid tmp = show $ M.filter id mp --foldMap (maybe 0 (bool 0 1)) mp 
@@ -141,25 +122,3 @@ instance Semigroup Int where
 
 instance Monoid Int where
   mempty = 0
-
-
-test = ["sesenwnenenewseeswwswswwnenewsewsw"
-  , "neeenesenwnwwswnenewnwwsewnenwseswesw"
-  , "seswneswswsenwwnwse"
-  , "nwnwneseeswswnenewneswwnewseswneseene"
-  , "swweswneswnenwsewnwneneseenw"
-  , "eesenwseswswnenwswnwnwsewwnwsene"
-  , "sewnenenenesenwsewnenwwwse"
-  , "wenwwweseeeweswwwnwwe"
-  , "wsweesenenewnwwnwsenewsenwwsesesenwne"
-  , "neeswseenwwswnwswswnw"
-  , "nenwswwsewswnenenewsenwsenwnesesenew"
-  , "enewnwewneswsewnwswenweswnenwsenwsw"
-  , "sweneswneswneneenwnewenewwneswswnese"
-  , "swwesenesewenwneswnwwneseswwne"
-  , "enesenwswwswneneswsenwnewswseenwsese"
-  , "wnwnesenesenenwwnenwsewesewsesesew"
-  , "nenewswnwewswnenesenwnesewesw"
-  , "eneswnwswnwsenenwnwnwwseeswneewsenese"
-  , "neswnwewnwnwseenwseesewsenwsweewe"
-  , "wseweeenwnesenwwwswnew"]

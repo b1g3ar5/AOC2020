@@ -39,6 +39,7 @@ dependencies:
 - massiv
 - parsec
 - unordered-containers
+- arithmoi
 
 library:
   source-dirs: src
