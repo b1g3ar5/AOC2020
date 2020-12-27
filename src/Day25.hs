@@ -50,9 +50,9 @@ day25 = do
       doorLoops = findLoopSize 7 doorKey
       cardLoops = findLoopSize 7 cardKey
 
-  putStrLn $ "Day24: part1: " ++ show (doorLoops, cardLoops)
-  putStrLn $ "Day24: part2: " ++ show (transform doorKey cardLoops)
-  putStrLn $ "Day24: part2: " ++ show (transform cardKey doorLoops)
+  putStrLn $ "Day25: part1: " ++ show (doorLoops, cardLoops)
+  putStrLn $ "Day25: part2: " ++ show (transform doorKey cardLoops)
+  putStrLn $ "Day25: part2: " ++ show (transform cardKey doorLoops)
 
   return ()
 

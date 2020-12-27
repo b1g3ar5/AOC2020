@@ -30,7 +30,7 @@ getLines = getF lines
 
 
 getParagraphs :: Int -> IO [[String]]
-getParagraphs = getF (splitOnChar "" . lines)
+getParagraphs = getF (filter (/=[]) . splitOnChar "" . lines)
 
 
 ------------------ VARIOUS UTILITY FUNCTIONS --------------------

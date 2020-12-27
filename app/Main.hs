@@ -71,12 +71,12 @@ main = do
   --day19
   --day19p
   --day19g
-  --day20
-  --day21
-  --day22
+  day20
+  day21
+  day22
   day23
-  --day24
-  --day25
+  day24
+  day25
 
 
 

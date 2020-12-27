@@ -22,12 +22,14 @@ import qualified Data.Set as S
 -- For part one I thought (overnight) that you could just count the 
 -- occurances of each edge, then 4 tiles will have 2 not recurring edges
 -- these are the corners. It might help to turn all the edges into a
--- Int for the orientation with most initial .s
+-- 'canonical' Int for the orientation with most initial .s
 
 
 -- Globals!
 gridSize :: Int
 gridSize = 12
+
+
 coordList :: [Coord]
 coordList = [(x,y) | x <- [0..(gridSize-1)], y <- [0..(gridSize-1)]]
 
@@ -145,7 +147,7 @@ orientationsSnake t = ts ++ fts
 day20 :: IO ()
 day20 = do
   gs <- getParagraphs 20
-  let tiles = parseTile <$> tail gs
+  let tiles = parseTile <$> gs
 
       arr :: Arrangement
       arr = head $ build M.empty tiles coordList
