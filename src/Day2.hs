@@ -1,7 +1,7 @@
 module Day2 where
 
 
-import Utils (getLines, split1)
+import Utils (getLines, span)
 
 
 data Rule = Rule { mn ::Int, mx ::  Int, ch :: Char, pwd :: String} deriving (Eq, Show)
@@ -13,7 +13,7 @@ readRule s = Rule (read smn) (read smx) ch pwd
     ws = words s
     ch = head $ ws!!1
     pwd = ws!!2
-    (smn, smx) = split1 '-' $ head ws
+    (smn, smx) = span (=='-') $ head ws
     
 
 valid1 :: Rule -> Bool

@@ -1,7 +1,7 @@
 module Day11 where
 
 
-import Utils ( getLines, Coord(..), neighbourCoords, at, race, directions, fixpoint )
+import Utils ( getLines, Coord(..), neighbourCoords, race, directions, fixpoint )
 import Data.Map ( Map, (!?), fromList, notMember, mapWithKey, (!) )
 import System.TimeIt ( timeIt )
 
@@ -25,7 +25,7 @@ rule1 g c
   | otherwise = cell
   where
     cell = g ! c
-    neighbours = neighbourCoords `at` c
+    neighbours = (c+) <$> neighbourCoords
     numNeighboursOccupied = length $ filter (\c -> g !? c == Just '#') neighbours 
 
 

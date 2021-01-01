@@ -1,29 +1,11 @@
-{-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TupleSections #-}
-{-# LANGUAGE DeriveFunctor #-}
-{-# LANGUAGE UndecidableInstances #-}
-{-# LANGUAGE AllowAmbiguousTypes #-}
-{-# LANGUAGE InstanceSigs #-}
-{-# LANGUAGE RankNTypes #-}
-
 module Day24 where
 
 
 import Utils hiding (neighbouts, neighbourCoords)
 
-import Control.Comonad (Comonad(..))
-import Control.Comonad.Representable.Store (Store(..), StoreT(..), store, experiment, peek)
-import Data.Distributive (Distributive(..))
-import Data.Functor.Compose (Compose(..))
-import Data.Functor.Rep (Representable(..), distributeRep)
-import Data.Functor.Identity (Identity(..))
-import Control.Monad (replicateM)
 import Data.List (delete, group, sort, nub)
 import Data.Bool (bool)
-import qualified Data.Set as S
-import Data.Maybe
 import qualified TotalMap as M
-
 
 
 data Dir = E | SE | SW | W | NW | NE deriving (Eq, Show)

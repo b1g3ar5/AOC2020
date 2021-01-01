@@ -32,6 +32,20 @@ packages:
       sha256: 09e4861f855e39b09ca76648e7dd0011ae0eeff78a40eb4772e11c05e1a24e16
   original:
     hackage: grids-0.5.0.1
+- completed:
+    hackage: repa-3.4.1.4@sha256:fab455d72a702f2d8a0c9be2de1d45ea1beb8f5949d8173bb95d2e7c515a6225,3323
+    pantry-tree:
+      size: 2965
+      sha256: 9df7e22a32219da108ee67a24a9a223973357ce40d2d920d3df994c46e98f77e
+  original:
+    hackage: repa-3.4.1.4
+- completed:
+    hackage: repa-io-3.4.1.1@sha256:083d8d66559c77078a50ed94130969a784489d944818ddd5bc000e1584fa2bed,1274
+    pantry-tree:
+      size: 570
+      sha256: 685ec8ceae9683e2d451b5b40b1038ee111796eb47d20824c20a02d1571eeeec
+  original:
+    hackage: repa-io-3.4.1.1
 snapshots:
 - completed:
     size: 532835

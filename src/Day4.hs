@@ -1,7 +1,7 @@
 module Day4 where
 
 
-import Utils (getLines, split1, splitOnStr)
+import Utils (getLines, splitAt, splitOn)
 import Data.Bifunctor (first)
 
 
@@ -131,4 +131,4 @@ validField PID = pidOK
 
 
 getPassportData :: [String] -> [PassportData]
-getPassportData ss = (first read <$>) . (split1 ':' <$>) . words . unwords <$> splitOnStr [""] ss
+getPassportData ss = (first read <$>) . (span (==':') <$>) . words . unwords <$> splitOn [""] ss

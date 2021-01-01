@@ -6,7 +6,7 @@ module Day7 where
 import Prelude hiding (reverse)
 import qualified Data.Map as M
 import Data.List ( groupBy, sort, nub )
-import Utils ( getLines, splitOnStr )
+import Utils ( getLines, splitOn )
 
 -- An implementatiin using hyolmorphisms, I've bben waiting for this one
 
@@ -96,9 +96,9 @@ day7 = do
 parseLine :: String -> (Colour, [(Int, Colour)])
 parseLine s = (col, if ps!!1 == "no other bags." then [] else parseBag <$> bs)
   where
-    ps = splitOnStr " bags contain " s
+    ps = splitOn " bags contain " s
     col = head ps
-    bs = splitOnStr ", " $ ps!!1
+    bs = splitOn ", " $ ps!!1
     parseBag :: String -> (Int, Colour)
     parseBag s = (n, col)
       where

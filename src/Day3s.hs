@@ -7,7 +7,7 @@ import qualified Data.Vector as V ((!))
 import Control.Comonad.Store ( store, ComonadStore(peek), Store )
 
 
--- A version using Store comonad - not really using it's best bits!
+-- A version using Store comonad - not really using it!
 
 type Grid a = Store Coord a
 

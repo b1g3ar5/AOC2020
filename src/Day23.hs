@@ -14,8 +14,7 @@ import System.TimeIt
 import qualified Data.IntMap.Strict as M
 import Data.IntMap.Strict (IntMap, (!))
 
-import Debug.Trace
-
+gameSize :: Int
 gameSize = 1000000
 
 -- To get the kill messages

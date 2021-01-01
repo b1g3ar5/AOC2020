@@ -1,7 +1,7 @@
 module Day13 where
 
 
-import Utils ( getLines, splitOnStr )
+import Utils ( getLines, splitOn )
 import Data.List ( sortOn )
 import Data.Bifunctor ( Bifunctor(second) )
 import Control.Monad ( guard )
@@ -25,7 +25,7 @@ day13 = do
   let target :: Integer
       target = read $ head ls
       buses :: [(Integer, Integer)]
-      buses = sortOn (Down . fst) $ (\(x, y) -> (y, (y-x) `mod` y)) . second read <$> filter (\(_,y)-> y /= "x") (zip [0..] $ splitOnStr "," (ls!!1))
+      buses = sortOn (Down . fst) $ (\(x, y) -> (y, (y-x) `mod` y)) . second read <$> filter (\(_,y)-> y /= "x") (zip [0..] $ splitOn "," (ls!!1))
 
   putStrLn $ "Day13: part1: " ++ show (uncurry (*) $ head $ (\x -> (x * (1 + target `div` x) - target,x)) . fst <$> buses) 
   putStrLn $ "Day13: part2: Seive: " ++ show (fst $ seive (1,1) buses) 

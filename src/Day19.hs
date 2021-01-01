@@ -45,7 +45,7 @@ mkIrule iss = \mp -> concat $ (\r -> r mp) . go <$> iss
 parseIrule :: String -> (Int, Irule)
 parseIrule s = (ix, go $ p!!1) 
   where
-    p = splitOnStr ":" s
+    p = splitOn ":" s
     ix :: Int
     ix = read $ head p
 
@@ -55,7 +55,7 @@ parseIrule s = (ix, go $ p!!1)
       | s == " \"b\"" = const [2]
       | otherwise = mkIrule $ (read <$>) . words <$> q
           where
-            q = splitOnStr "|" s
+            q = splitOn "|" s
 
 
 loeb :: Functor f => f (f a -> a) -> f a
@@ -65,7 +65,7 @@ loeb x = go where go = fmap ($ go) x
 day19 :: IO ()
 day19 = do
   ls1 <- getLines 19
-  let pieces = splitOnStr [""] ls1
+  let pieces = splitOn [""] ls1
       ruleLs = head pieces
       testStrings = pieces!!1
       irules1 :: Map Int Irule

@@ -4,7 +4,7 @@
 module Day21 where
 
 
-import Utils ( getLines, splitOnStr, intersections )
+import Utils ( getLines, splitOn, intersections )
 import Data.List ( foldl', intercalate, sort, sortOn )
 import Data.Vector (Vector)
 import qualified Data.Vector as V
@@ -17,9 +17,9 @@ type Allergen = String
 type Food = (S.Set Ingredient, S.Set Allergen)
 
 parseLine :: String -> Food
-parseLine s = (S.fromList $ words $ head pieces, S.fromList $ splitOnStr ", " $ init $ pieces!!1) 
+parseLine s = (S.fromList $ words $ head pieces, S.fromList $ splitOn ", " $ init $ pieces!!1) 
   where
-    pieces = splitOnStr " (contains " s
+    pieces = splitOn " (contains " s
 
 
 -- The set of ingredients that might contain the allergen

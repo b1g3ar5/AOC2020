@@ -16,8 +16,6 @@ import Day9
 import Day10
 import Day11
 import Day11s
-import Day11g
-import Day11v
 import Day12
 import Day13
 import Day14
@@ -56,7 +54,6 @@ main = do
   --day9
   --day10
   --day11
-  --day11v
   --day11s
   --day12
   --day13
@@ -64,19 +61,19 @@ main = do
   --day15m
   --day15v
   --day16
-  --day17
-  --day17m
+  day17
+  day17m
   --day18
   --day18p
   --day19
   --day19p
   --day19g
-  day20
-  day21
-  day22
-  day23
-  day24
-  day25
+  --day20
+  --day21
+  --day22
+  --day23
+  --day24
+  --day25
 
 
 

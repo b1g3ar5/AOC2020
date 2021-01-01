@@ -1,13 +1,56 @@
 {-# LANGUAGE TupleSections #-}
-{-# LANGUAGE TypeSynonymInstances #-}
 {-# LANGUAGE FlexibleInstances #-}
 
 
-module Utils where
+module Utils (
+  getLines
+  , getRaw
+  , getWords
+  , getParagraphs
+  , splitOn
+  , toInt
+  , fromInt
+  , pad
+  , Coord
+  , allCoords
+  , neighbourCoords
+  , splitAt
+  , intersections
+  , clockTurn
+  , antiTurn
+  , directions
+  , leftOf
+  , rightOf
+  , above
+  , below
+  , neighbours
+  , span
+  , race
+  , fixpoint
+)
+where
 
 
 import qualified Data.Set as S
+import qualified Data.HashSet as HS
+import qualified Data.Vector as V
+import qualified Data.Vector.Unboxed.Mutable as VM
+import qualified Data.Map.Strict as M
+import qualified Data.IntMap.Strict as IM
+import Data.Sequence (Seq(..), (><), (|>), (<|))
 import Data.List
+import Data.List.Split
+import Data.Bifunctor
+import Data.Tuple
+import Data.Maybe
+import Control.Monad
+import Control.Monad.ST (runST, ST(..))
+import System.TimeIt ( timeIt )
+
+--- Things to add
+
+-- Rectangular grid with focus and distributive, representable instances
+-- Directions, rotations...
 
 ------------ GET THE INPUT FROM FILE ------------------
 
@@ -88,13 +131,6 @@ pad n b bs = replicate (fromIntegral n - length bs) b ++ take (fromIntegral n) b
 
 ------------------------ SPLITTING OF STRINGS -----------------------
 
--- Split a string into 2 at a character
-split1 :: (Eq a) => a -> [a] -> ([a], [a])
-split1 ch = go []
-  where
-    go acc (x:xs)
-      | x == ch = (acc, xs)
-      | otherwise = go (acc++[x]) xs
 
 
 -- Like words but you specify the character
@@ -110,15 +146,8 @@ splitOnChar c = reverse . go []
       | otherwise = go ((w++[x]):ws) xs
 
 
-splitOnStr :: Eq a => [a] -> [a] -> [[a]]
-splitOnStr s = reverse . go [[]]
-  where
-    n = length s
-    go acc [] = acc
-    go acc@(w:ws) xs
-      | take n xs == s = go ([]:acc) $ drop n xs
-      | otherwise = go ((w ++ [head xs]):ws) $ tail xs
-
+--splitOnStr :: Eq a => [a] -> [a] -> [[a]]
+--splitOnStr = splitOn
 
 
 ------------------------ COORDINATE / VECTOR STUFF ------------

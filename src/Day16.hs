@@ -7,9 +7,10 @@
 module Day16 where
 
 
-import Utils ( getLines, splitOnStr )
+import Utils ( getLines, splitOn )
 import Data.List ( intersect, sortOn, transpose )
 import Data.Bifunctor (second)
+
 
 -- | Numbers that break all the rules
 notValid :: [Rule] -> Ticket -> [Int]
@@ -70,7 +71,6 @@ day16 = do
   
 
 -- Parsing...
-
 type Range = (Int, Int)
 type Rule = (String, Range, Range)
 type Ticket = [Int]
@@ -79,22 +79,22 @@ type Ticket = [Int]
 parse :: [String] -> ([Rule], Ticket, [Ticket])
 parse ls = (parseRule <$> head gps, parseTicket $ (gps!!1)!!1, parseTicket <$> tail (gps!!2))
   where
-    gps = splitOnStr [""] ls
+    gps = splitOn [""] ls
 
 
 parseTicket :: String -> Ticket
-parseTicket s = read <$> splitOnStr "," s
+parseTicket s = read <$> splitOn "," s
 
 
 parseRule :: String -> Rule
 parseRule s = (head pieces, parseRange $ head rgs, parseRange $ rgs!!1)
   where
-    pieces = splitOnStr ":" s
-    rgs = splitOnStr " or " $ pieces!!1    
+    pieces = splitOn ":" s
+    rgs = splitOn " or " $ pieces!!1    
 
 
 parseRange :: String -> Range
 parseRange s = (read $ head pieces, read $ pieces!!1)
   where
-    pieces = splitOnStr "-" s    
+    pieces = splitOn "-" s    
 

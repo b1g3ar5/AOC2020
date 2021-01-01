@@ -6,7 +6,7 @@
 module Day11s where
 
 
-import Utils
+import Utils ( Coord, getLines, race, neighbourCoords, allCoords, directions )
 import Data.List ( intercalate )
 import Data.Vector (Vector)
 import qualified Data.Vector as V

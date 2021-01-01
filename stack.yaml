@@ -6,4 +6,7 @@ extra-deps:
 - sized-grid-0.2.0.1
 - lazysmallcheck-0.6
 - grids-0.5.0.1
+- repa-3.4.1.4
+- repa-io-3.4.1.1
+
 resolver: lts-16.24

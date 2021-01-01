@@ -1,25 +1,12 @@
-
-{-# LANGUAGE DataKinds #-}
-{-# LANGUAGE FlexibleContexts #-}
-{-# LANGUAGE ViewPatterns #-}
-{-# LANGUAGE TypeApplications #-}
-{-# LANGUAGE AllowAmbiguousTypes #-}
-
-
 module Day25 where
 
 
-import Math.NumberTheory.Moduli.Singleton ( CyclicGroup, cyclicGroup )
-import Data.Maybe
-import Data.Foldable (traverse_)
-import GHC.TypeNats (KnownNat, SomeNat(SomeNat), someNatVal, Nat)
-import Math.NumberTheory.Moduli ((^%), Mod, discreteLogarithm, getVal, isMultElement, isPrimitiveRoot)
 import Numeric.Natural (Natural)
-import Data.Proxy
 
+doorKey :: Integer
 doorKey = 1327981 --17807724
+cardKey :: Integer
 cardKey = 2822615 --5764801
-
 
 
 modn :: Natural

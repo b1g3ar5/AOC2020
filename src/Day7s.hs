@@ -5,7 +5,7 @@ module Day7s where
 
 import Data.Tuple
 import Data.List hiding (reverse)
-import Utils ( getLines, splitOnStr )
+import Utils ( getLines, splitOn )
 
 -- This is a simple implementation - recursing down the tree
 
@@ -19,9 +19,9 @@ data Bag = Bag { col :: Colour
 parse :: String -> Bag
 parse s = Bag col $ if ps!!1 == "no other bags." then [] else parseBag <$> bs 
   where
-    ps = splitOnStr " bags contain " s
+    ps = splitOn " bags contain " s
     col = head ps
-    bs = splitOnStr ", " $ ps!!1
+    bs = splitOn ", " $ ps!!1
     parseBag :: String -> (Int, Colour)
     parseBag s = (n, col)
       where

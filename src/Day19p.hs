@@ -30,7 +30,7 @@ parseRule s
       ix = read $ init ns
       (ns:nss) = words s
       pss :: Rule
-      pss = foldl1 Or $ foldl1 And . (Get . read <$>) <$> splitOnChar "|" nss
+      pss = foldl1 Or $ foldl1 And . (Get . read <$>) <$> splitOn ["|"] nss
 
 
 -- | Make a rule map from all the rule strings

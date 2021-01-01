@@ -4,7 +4,7 @@ cabal-version: 1.12
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: c35cab92f5eba269830ab3f3fe1d0ae740875358e2e663f996c45da779721c2f
+-- hash: c749c88ac339022d8804485c98e596a84cb7e0ab2da17cb19a9dbcd6f9bd74a2
 
 name:           AOC2020
 version:        0.1.0.0
@@ -31,9 +31,7 @@ library
       Day1
       Day10
       Day11
-      Day11g
       Day11s
-      Day11v
       Day12
       Day13
       Day14
@@ -92,6 +90,7 @@ library
     , semirings
     , sized-grid
     , sort
+    , split
     , tasty
     , tasty-hunit
     , tasty-quickcheck
@@ -129,6 +128,7 @@ executable AOC2020-exe
     , semirings
     , sized-grid
     , sort
+    , split
     , tasty
     , tasty-hunit
     , tasty-quickcheck
@@ -168,6 +168,7 @@ test-suite AOC2020-test
     , semirings
     , sized-grid
     , sort
+    , split
     , tasty
     , tasty-hunit
     , tasty-quickcheck

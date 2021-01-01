@@ -3,7 +3,7 @@
 module Day14 where
 
 
-import Utils ( fromInt, getRaw, pad, splitOnStr, toInt )
+import Utils ( fromInt, getRaw, pad, splitOn, toInt )
 
 import qualified Data.Map as M
 import Data.List ( foldl' )
@@ -82,7 +82,7 @@ parseBit 'X' = Nothing
 parse :: String -> [Set]
 parse s = parseSet . lines <$> pieces
   where
-    pieces = tail $ splitOnStr "mask = " s
+    pieces = tail $ splitOn "mask = " s
 
 
 parseSet :: [String] -> Set
@@ -92,7 +92,7 @@ parseSet ls = (parseMask $ head ls, parseWrite <$> tail ls)
 parseWrite :: String -> Write
 parseWrite s = (read $ head pieces, read $ pieces !!1)
   where
-    pieces = splitOnStr "] = " $ drop 4 s
+    pieces = splitOn "] = " $ drop 4 s
 
 
 parseMask :: String -> [MBit]
