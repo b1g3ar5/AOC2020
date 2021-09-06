@@ -4,6 +4,7 @@ module Day4 where
 import Utils (getLines, splitAt, splitOn)
 import Data.Bifunctor (first)
 
+import Debug.Trace
 
 day4 :: IO ()
 day4 = do
@@ -13,6 +14,7 @@ day4 = do
   let valids1 = filter valid1 ps
   let valids2 = filter valid2 ps
 
+  putStrLn $ "Day4: part1: " ++ show (read "iyr" :: Field)
   putStrLn $ "Day4: part1: " ++ show (length valids1)
   putStrLn $ "Day4: part2: " ++ show (length valids2)
 
@@ -78,6 +80,7 @@ hgtOK s
 
 
 hclOK :: String -> Bool
+hclOK [] = error "This shouldn't happen in hclOK"
 hclOK (c:cs)
   | c /= '#' = False
   | length cs /= 6 = False
@@ -131,4 +134,10 @@ validField PID = pidOK
 
 
 getPassportData :: [String] -> [PassportData]
-getPassportData ss = (first read <$>) . (span (==':') <$>) . words . unwords <$> splitOn [""] ss
+getPassportData ls = go <$> ls
+  where
+    go :: String -> PassportData
+    go s = (\(f:(s:_)) -> (read f, s)) <$> pss
+      where
+        ws = words s
+        pss = splitOn ":" <$> ws

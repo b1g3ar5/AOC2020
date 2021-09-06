@@ -41,6 +41,7 @@ dependencies:
 - unordered-containers
 - arithmoi
 - split
+- Useful
 
 library:
   source-dirs: src

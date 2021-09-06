@@ -37,44 +37,45 @@ import Day23
 import Day24
 import Day25
 
+import System.TimeIt
+
 main :: IO ()
 main = do
-  --day1
-  --day2
-  --day3
-  --day3m
-  --day3s
-  --day3vs
-  --day4
-  --day5
-  --day6
-  --day7s
-  --day7
-  --day8
-  --day9
-  --day10
-  --day11
-  --day11s
-  --day12
-  --day13
-  --day14
-  --day15m
-  --day15v
-  --day16
-  day17
-  day17m
-  --day18
-  --day18p
-  --day19
-  --day19p
-  --day19g
-  --day20
-  --day21
-  --day22
-  --day23
-  --day24
-  --day25
-
+  timeIt day1
+  timeIt day2
+  timeIt day3
+  timeIt day3m
+  timeIt day3s
+  timeIt day3vs
+  timeIt day4
+  timeIt day5
+  timeIt day6
+  timeIt day7s
+  timeIt day7
+  timeIt day8
+  timeIt day9
+  timeIt day10
+  timeIt day11
+  timeIt day11s
+  timeIt day12
+  timeIt day13
+  timeIt day14
+  timeIt day15m
+  timeIt day15v
+  timeIt day16
+  timeIt day17
+  timeIt day17m
+  timeIt day18
+  timeIt day18p
+  timeIt day19
+  timeIt day19p
+  timeIt day19g
+  timeIt day20
+  timeIt day21
+  timeIt day22
+  timeIt day23
+  timeIt day24
+  timeIt day25
 
 
 

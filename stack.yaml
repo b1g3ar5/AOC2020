@@ -1,6 +1,7 @@
 packages:
 - .
-- ../../Clever
+- ../../../Clever
+- ../../../Useful
 extra-deps:
 - Stream-0.4.7.2
 - sized-grid-0.2.0.1
@@ -9,4 +10,4 @@ extra-deps:
 - repa-3.4.1.4
 - repa-io-3.4.1.1
 
-resolver: lts-16.24
+resolver: lts-18.6

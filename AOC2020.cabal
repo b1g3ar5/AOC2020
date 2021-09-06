@@ -1,10 +1,10 @@
 cabal-version: 1.12
 
--- This file has been generated from package.yaml by hpack version 0.33.0.
+-- This file has been generated from package.yaml by hpack version 0.34.4.
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: c749c88ac339022d8804485c98e596a84cb7e0ab2da17cb19a9dbcd6f9bd74a2
+-- hash: 9b92607d94c5cfe09f9b679fac0c9c46800a505b00f304e5eef69473186c1810
 
 name:           AOC2020
 version:        0.1.0.0
@@ -72,6 +72,7 @@ library
       src
   build-depends:
       Clever
+    , Useful
     , adjunctions
     , arithmoi
     , base >=4.7 && <5
@@ -110,6 +111,7 @@ executable AOC2020-exe
   build-depends:
       AOC2020
     , Clever
+    , Useful
     , adjunctions
     , arithmoi
     , base >=4.7 && <5
@@ -150,6 +152,7 @@ test-suite AOC2020-test
   build-depends:
       AOC2020
     , Clever
+    , Useful
     , adjunctions
     , arithmoi
     , base >=4.7 && <5
